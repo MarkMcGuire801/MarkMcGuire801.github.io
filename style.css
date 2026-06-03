@@ -1126,6 +1126,7 @@ footer {
   html, body {
     overflow-x: hidden;               /* hides horizontal overflow */
     width: 100%;
+    max-width: 100%;
   }
 
 
@@ -1186,12 +1187,14 @@ footer {
     gap: 0.4rem;                      /* tighter gap between nav items */
     padding-left: 0;                  /* removes any inherited left padding */
     width: 100%;
+    box-sizing: border-box;
   }
 
-  /* Remove left border dividers on wrapped nav items */
+  /* Remove all left spacing from non-first nav items on mobile */
   nav a:not(:first-child) {
     border-left: none;                /* dividers don't make sense when wrapping */
     padding-left: 0;
+    margin-left: 0;                   /* explicitly zero out any margin */
   }
 
   /* Smaller bordered nav links on mobile */
@@ -1200,6 +1203,8 @@ footer {
     padding: 0.25rem 0.5rem;          /* tighter padding on nav links */
     border-radius: 4px;
     font-size: 0.8rem;                /* smaller font to fit more on one line */
+    margin: 0;                        /* zero out any inherited margin */
+    box-sizing: border-box;           /* includes border in size calculation */
   }
 
   /* Keep active link styled correctly on mobile */
@@ -1222,6 +1227,9 @@ footer {
      the screen width on mobile */
   main {
     padding: 1.5rem 1rem;             /* less padding than desktop */
+    width: 100%;
+    box-sizing: border-box;           /* prevents padding from adding extra width */
+    overflow-x: hidden;
   }
 
 
@@ -1313,6 +1321,8 @@ footer {
      contact info on mobile */
   footer {
     padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .footer-contact {
