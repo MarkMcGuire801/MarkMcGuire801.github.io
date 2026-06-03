@@ -1133,12 +1133,14 @@ footer {
   /* ── Header ──
      Stack name and contact box
      vertically instead of side by side.
-     Reduced padding prevents nav cutoff */
+     Only hides horizontal overflow so
+     nav button borders aren't clipped */
   header {
-    padding: 0.75rem;                 /* reduced to prevent nav cutoff */
-    overflow: hidden;
+    padding: 0.75rem;
+    overflow-x: hidden;               /* only hide horizontal overflow */
+    overflow-y: visible;              /* allows nav buttons to show fully */
     width: 100%;
-    box-sizing: border-box;           /* includes padding in width calculation */
+    box-sizing: border-box;
   }
 
   .header-top {
@@ -1181,12 +1183,14 @@ footer {
 
   /* ── Navigation ──
      Allow nav links to wrap onto
-     multiple lines on narrow screens */
+     multiple lines on narrow screens.
+     Small left padding ensures button
+     borders are not clipped by header */
   nav {
     flex-wrap: wrap;                  /* allows links to wrap to next line */
     gap: 0.4rem;
-    padding: 0;                       /* remove all padding */
-    margin: 0;                        /* remove all margin */
+    padding: 0.25rem 0 0 0.25rem;     /* small left and top padding so borders show */
+    margin: 0;
     width: 100%;
     box-sizing: border-box;
     align-items: flex-start;          /* aligns wrapped rows to the left */
@@ -1195,17 +1199,17 @@ footer {
 
   /* Remove all left spacing from non-first nav items on mobile */
   nav a:not(:first-child) {
-    border-left: none;
+    border-left: none;                /* dividers don't make sense when wrapping */
     padding-left: 0;
-    margin-left: 0;
+    margin-left: 0;                   /* explicitly zero out any margin */
   }
 
   /* Smaller bordered nav links on mobile */
   nav a {
     border: 1px solid var(--border);
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.5rem;          /* tighter padding on nav links */
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: 0.8rem;                /* smaller font to fit more on one line */
     margin: 0;
     box-sizing: border-box;
     display: inline-block;            /* ensures border wraps tightly around text */
@@ -1214,7 +1218,7 @@ footer {
   /* Keep active link styled correctly on mobile */
   nav a.active {
     border-color: var(--green);
-    border-bottom: 1px solid var(--green);
+    border-bottom: 1px solid var(--green);  /* override desktop underline style */
     color: var(--green);
   }
 
