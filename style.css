@@ -1216,6 +1216,7 @@ footer {
     margin: 0;
     box-sizing: border-box;
     display: inline-block;            /* ensures border wraps tightly around text */
+    text-align: center;               /* centers text within the button */ 
   }
 
   /* Active link — full button border turns green on mobile
