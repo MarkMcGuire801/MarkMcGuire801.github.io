@@ -1271,3 +1271,39 @@ footer {
   }
 
 }
+
+/* ── Overflow Fix ──
+     Prevents any element from being
+     wider than the screen and causing
+     horizontal scroll */
+  html, body {
+    overflow-x: hidden;               /* hides horizontal overflow */
+    width: 100%;
+  }
+
+  /* Force header to fill full screen width */
+  header {
+    width: 100%;
+    box-sizing: border-box;           /* includes padding in width calculation */
+  }
+
+  /* Force contact info box to never exceed screen width */
+  .contact-info {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Prevent contact detail text from overflowing */
+  .contact-details {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Prevent long email address from pushing layout wide */
+  .contact-details span,
+  .contact-details a {
+    overflow: hidden;
+    text-overflow: ellipsis;          /* adds ... if text is too long */
+    white-space: nowrap;
+    max-width: 100%;
+  }
