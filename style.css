@@ -1112,7 +1112,6 @@ footer {
   margin: 0;
   font-style: italic;
 }
-
 /* ════════════════════════════════
    MOBILE RESPONSIVE
    Styles that apply on screens
@@ -1166,21 +1165,29 @@ footer {
     padding: 0.5rem 0.75rem;
   }
 
-  /* Contact detail rows wrap more tightly on mobile */
+  /* Contact detail rows wrap naturally on mobile */
   .contact-details {
     gap: 0.5rem;
     font-size: 0.8rem;
     max-width: 100%;
     overflow: hidden;
+    flex-wrap: wrap;                  /* allows items to wrap naturally */
   }
 
-  /* Prevent long email address from pushing layout wide */
-  .contact-details span,
-  .contact-details a {
+  /* Prevent long email from pushing layout wide —
+     scoped to contact-info only so nav links are unaffected */
+  .contact-info .contact-details span,
+  .contact-info .contact-details a {
     overflow: hidden;
     text-overflow: ellipsis;          /* adds ... if text is too long */
     white-space: nowrap;
     max-width: 100%;
+  }
+
+  /* Hide pipe dividers on mobile — spacing provides
+     enough separation between contact items */
+  .contact-divider {
+    display: none;                    /* hides | dividers on mobile */
   }
 
 
@@ -1216,8 +1223,10 @@ footer {
     margin: 0;
     box-sizing: border-box;
     display: inline-block;            /* ensures border wraps tightly around text */
-    text-align: center;               /* centers text within the button */ 
-    line-height: 1; 
+    text-align: center;               /* centers text within the button */
+    line-height: 1;                   /* prevents inherited line-height pushing text out */
+    white-space: nowrap;              /* keeps each nav link on one line */
+    overflow: visible;                /* ensures text is never clipped */
   }
 
   /* Active link — full button border turns green on mobile
@@ -1347,22 +1356,5 @@ footer {
     gap: 0.5rem;
     font-size: 0.8rem;
   }
-/* ── Contact Info Box ──
-     Hide pipe dividers on mobile since
-     they strand on their own line when
-     items wrap — spacing provides enough
-     separation between items */
-  .contact-divider {
-    display: none;                    /* hides | dividers on mobile */
-  }
 
-  /* Contact detail rows stack cleanly
-     without dividers on mobile */
-  .contact-details {
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    max-width: 100%;
-    overflow: hidden;
-    flex-wrap: wrap;                  /* allows items to wrap naturally */
-  }
 }
