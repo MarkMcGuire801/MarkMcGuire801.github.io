@@ -1217,6 +1217,7 @@ footer {
     box-sizing: border-box;
     display: inline-block;            /* ensures border wraps tightly around text */
     text-align: center;               /* centers text within the button */ 
+    line-height: 1; 
   }
 
   /* Active link — full button border turns green on mobile
@@ -1346,5 +1347,22 @@ footer {
     gap: 0.5rem;
     font-size: 0.8rem;
   }
+/* ── Contact Info Box ──
+     Hide pipe dividers on mobile since
+     they strand on their own line when
+     items wrap — spacing provides enough
+     separation between items */
+  .contact-divider {
+    display: none;                    /* hides | dividers on mobile */
+  }
 
+  /* Contact detail rows stack cleanly
+     without dividers on mobile */
+  .contact-details {
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    max-width: 100%;
+    overflow: hidden;
+    flex-wrap: wrap;                  /* allows items to wrap naturally */
+  }
 }
