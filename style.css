@@ -181,13 +181,16 @@ nav a:hover {
 /* Green text and underline on the current page link */
 nav a.active {
   color: var(--green);
-  border-bottom: 2px solid var(--green);
+  text-decoration: underline;
+  text-decoration-color: var(--green);  /* green underline */
+  text-underline-offset: 4px;           /* small gap between text and underline */
+  text-decoration-thickness: 2px;       /* matches original border thickness */
 }
 
 /* White divider between nav items — skips the first item
    so there's no leading divider on the left */
 nav a:not(:first-child) {
-  border-left: 3px solid var(--text);  /* white — matches contact info dividers */
+  border-left: 3px solid var(--text);
   padding-left: 1.5rem;
 }
 
@@ -1215,11 +1218,13 @@ footer {
     display: inline-block;            /* ensures border wraps tightly around text */
   }
 
-  /* Keep active link styled correctly on mobile */
+  /* Active link — full button border turns green on mobile
+     text-decoration removed since the border already
+     indicates the active page clearly */
   nav a.active {
-    border-color: var(--green);
-    border-bottom: 1px solid var(--green);  /* override desktop underline style */
+    border: 1px solid var(--green);   /* full button border turns green */
     color: var(--green);
+    text-decoration: none;            /* no underline needed on mobile */
   }
 
 
