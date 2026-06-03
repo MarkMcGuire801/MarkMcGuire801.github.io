@@ -1109,3 +1109,165 @@ footer {
   margin: 0;
   font-style: italic;
 }
+
+/* ════════════════════════════════
+   MOBILE RESPONSIVE
+   Styles that apply on screens
+   narrower than 768px — adjusts
+   the header, nav, contact box,
+   and content layout for mobile
+════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Header ──
+     Stack name and contact box
+     vertically instead of side by side */
+  header {
+    padding: 1rem;                    /* even padding on all sides */
+  }
+
+  .header-top {
+    flex-direction: column;           /* stacks name above contact box */
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  /* Contact box stretches full width on mobile */
+  .contact-info {
+    width: 100%;
+    border: 1px solid var(--border);  /* restore all borders since it's no longer flush */
+    border-radius: 6px;               /* round all corners */
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Contact detail rows wrap more tightly on mobile */
+  .contact-details {
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+
+  /* ── Navigation ──
+     Allow nav links to wrap onto
+     multiple lines on narrow screens */
+  nav {
+    flex-wrap: wrap;                  /* allows links to wrap to next line */
+    gap: 0.5rem;
+  }
+
+  /* Remove left border dividers on wrapped nav items */
+  nav a:not(:first-child) {
+    border-left: none;                /* dividers don't make sense when wrapping */
+    padding-left: 0;
+  }
+
+  /* Add a subtle border around each nav link instead */
+  nav a {
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  /* Keep active link styled correctly on mobile */
+  nav a.active {
+    border-color: var(--green);
+    border-bottom: 1px solid var(--green);  /* override desktop underline style */
+  }
+
+
+  /* ── Main Content ──
+     Reduce padding so content fills
+     the screen width on mobile */
+  main {
+    padding: 1.5rem 1rem;             /* less padding than desktop */
+  }
+
+
+  /* ── Hero Section ──
+     Scale down the large name text
+     so it fits on a narrow screen */
+  .hero {
+    padding: 2rem 1rem 0 1rem;
+  }
+
+  .hero-name {
+    font-size: 2rem;                  /* smaller than desktop 3rem */
+  }
+
+  .hero-title {
+    font-size: 0.95rem;
+  }
+
+
+  /* ── Skills Grid ──
+     Already handled by existing
+     media query but restated here
+     for clarity */
+  .skills-grid {
+    grid-template-columns: 1fr;       /* single column on mobile */
+  }
+
+
+  /* ── Cert Grid ──
+     Single column on mobile so
+     cert cards don't squish */
+  .cert-grid {
+    grid-template-columns: 1fr;       /* single column on mobile */
+  }
+
+
+  /* ── Project and Blog Cards ──
+     Stack the header content on
+     mobile so tags don't squish
+     the title */
+  .project-card-header,
+  .blog-card-header {
+    flex-direction: column;           /* stacks title above tags */
+    gap: 0.5rem;
+  }
+
+  .project-tags {
+    justify-content: flex-start;      /* left aligns tags on mobile */
+  }
+
+
+  /* ── Reference Cards ──
+     Keep avatar and info readable
+     on smaller screens */
+  .reference-identity {
+    align-items: flex-start;          /* aligns avatar to top on mobile */
+  }
+
+
+  /* ── Issuer Header ──
+     Stack issuer name and verify
+     link vertically on mobile */
+  .issuer-header {
+    flex-direction: column;           /* stacks name above verify link */
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+
+  /* ── Resume Embed ──
+     Shorter height on mobile so it
+     doesn't take up the whole screen */
+  .resume-embed {
+    height: 400px;                    /* fixed height on mobile */
+  }
+
+
+  /* ── Footer ──
+     Tighter padding on mobile */
+  footer {
+    padding: 1rem;
+  }
+
+  .footer-contact {
+    flex-wrap: wrap;                  /* allows contact items to wrap */
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+}
