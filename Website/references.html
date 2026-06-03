@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding — ensures special characters display correctly -->
+  <meta charset="UTF-8" />
+  <!-- Responsive viewport — makes the page scale correctly on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page title — shows in the browser tab and search engine results -->
+  <title>Mark McGuire - References</title>
+  <!-- Font Awesome — loaded before style.css so our styles can override if needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Shared stylesheet — loads last so it takes priority over external libraries -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════
+       HEADER
+       Contains site name, contact info
+       box, and main navigation
+  ═══════════════════════════════ -->
+  <header>
+
+    <!-- Top row: site name left, contact info box flush to top right -->
+    <div class="header-top">
+
+      <!-- Site name — white text, large font -->
+      <div class="site-name">Mark McGuire</div>
+
+      <!-- Contact info box — sits flush to top right of header -->
+      <div class="contact-info">
+
+        <!-- Label above the contact details -->
+        <div class="contact-info-label">Contact Information</div>
+
+        <!-- Row 1: Phone and Email -->
+        <div class="contact-details">
+          <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+        </div>
+
+        <!-- Row 2: LinkedIn, GitHub, and Location -->
+        <div class="contact-details">
+          <a href="https://www.linkedin.com/in/marktdem/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <span class="contact-divider">|</span>
+          <a href="https://github.com/MarkMcGuire801" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-location-dot"></i> Tucson, AZ</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation bar — class="active" marks the current page -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html">Blog</a>
+      <a href="credentials.html">Credentials</a>
+      <a href="references.html" class="active">References</a>
+    </nav>
+
+  </header>
+
+  <!-- ═══════════════════════════════
+       MAIN CONTENT
+       All page-specific content sits
+       inside this block
+  ═══════════════════════════════ -->
+  <main>
+
+    <!-- Page heading — identifies the current page for the visitor -->
+    <h2 class="section-title">References</h2>
+
+    <!-- Privacy note — contact info withheld intentionally -->
+    <p class="references-note">
+      <i class="fa fa-lock"></i> Reference contact information available upon request.
+    </p>
+
+    <!-- ═══════════════════════════════
+         REFERENCES FEED
+         Single column list of reference
+         cards — to add a new reference:
+         1. Copy a reference-card block below
+         2. Update the initials in the avatar
+         3. Update name, title, relationship,
+            and quote fields
+         4. Change the relationship icon if
+            needed — fa-user-tie for professional
+            contacts, fa-chalkboard-teacher for
+            instructors
+    ═══════════════════════════════ -->
+    <div class="references-feed">
+
+      <!-- ── Reference 1 ── -->
+      <div class="reference-card">
+
+        <!-- Reference identity — avatar, name, title, and relationship -->
+        <div class="reference-header">
+          <div class="reference-identity">
+
+            <!-- Initials avatar — update letters to match the reference's name -->
+            <div class="reference-avatar">JD</div>
+
+            <!-- Name, job title, and relationship to you -->
+            <div class="reference-info">
+              <h3 class="reference-name">Jane Doe</h3>
+              <p class="reference-title">IT Manager — Placeholder Company</p>
+              <!-- Relationship label — describes how you know this person -->
+              <p class="reference-relationship">
+                <i class="fa fa-user-tie"></i> Direct Supervisor
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Quote / testimonial from the reference -->
+        <blockquote class="reference-quote">
+          "Mark consistently demonstrated a strong work ethic and an eagerness
+          to learn. His ability to pick up new technologies quickly and apply
+          them effectively made him a valuable member of the team. I have full
+          confidence in his ability to grow into a cybersecurity role."
+        </blockquote>
+
+      </div>
+
+      <!-- ── Reference 2 ── -->
+      <div class="reference-card">
+
+        <!-- Reference identity — avatar, name, title, and relationship -->
+        <div class="reference-header">
+          <div class="reference-identity">
+
+            <!-- Initials avatar — update letters to match the reference's name -->
+            <div class="reference-avatar">JS</div>
+
+            <!-- Name, job title, and relationship to you -->
+            <div class="reference-info">
+              <h3 class="reference-name">John Smith</h3>
+              <p class="reference-title">Senior Systems Administrator — Placeholder Company</p>
+              <!-- Relationship label — describes how you know this person -->
+              <p class="reference-relationship">
+                <i class="fa fa-user-tie"></i> Colleague
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Quote / testimonial from the reference -->
+        <blockquote class="reference-quote">
+          "Working alongside Mark gave me a clear picture of his technical
+          capabilities and his commitment to getting things right. He approaches
+          problems methodically and isn't afraid to dig deep to find the root
+          cause. Any team would be lucky to have him."
+        </blockquote>
+
+      </div>
+
+      <!-- ── Reference 3 ── -->
+      <div class="reference-card">
+
+        <!-- Reference identity — avatar, name, title, and relationship -->
+        <div class="reference-header">
+          <div class="reference-identity">
+
+            <!-- Initials avatar — update letters to match the reference's name -->
+            <div class="reference-avatar">SJ</div>
+
+            <!-- Name, job title, and relationship to you -->
+            <div class="reference-info">
+              <h3 class="reference-name">Sarah Johnson</h3>
+              <p class="reference-title">Network Engineering Instructor — Placeholder Institution</p>
+              <!-- Relationship label — describes how you know this person -->
+              <p class="reference-relationship">
+                <i class="fa fa-chalkboard-teacher"></i> Instructor
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Quote / testimonial from the reference -->
+        <blockquote class="reference-quote">
+          "Mark was one of the most engaged students in my network engineering
+          program. His capstone project stood out for its depth and attention
+          to security design principles. He has a natural aptitude for this
+          field and the drive to back it up."
+        </blockquote>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+       Displays contact info and
+       copyright at the bottom of
+       every page
+  ═══════════════════════════════ -->
+  <footer>
+    <div class="footer-contact">
+      <!-- Quick contact info repeated from header for easy access -->
+      <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+      <span class="contact-divider">|</span>
+      <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+    </div>
+    <!-- Copyright line -->
+    <p>&copy; 2026 Mark McGuire</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding — ensures special characters display correctly -->
+  <meta charset="UTF-8" />
+  <!-- Responsive viewport — makes the page scale correctly on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Update this title for each new post -->
+  <title>Mark McGuire - Blog | POST TITLE HERE</title>
+  <!-- Font Awesome — loaded before style.css so our styles can override if needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Path goes up one level since this file lives in blog-posts/ -->
+  <!-- Shared stylesheet — loads last so it takes priority over external libraries -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════
+       HEADER
+       All links and paths go up one
+       level with ../ since this file
+       lives inside the blog-posts/ folder
+  ═══════════════════════════════ -->
+  <header>
+
+    <!-- Top row: site name left, contact info box flush to top right -->
+    <div class="header-top">
+
+      <!-- Site name — white text, large font -->
+      <div class="site-name">Mark McGuire</div>
+
+      <!-- Contact info box — sits flush to top right of header -->
+      <div class="contact-info">
+
+        <!-- Label above the contact details -->
+        <div class="contact-info-label">Contact Information</div>
+
+        <!-- Row 1: Phone and Email -->
+        <div class="contact-details">
+          <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+        </div>
+
+        <!-- Row 2: LinkedIn, GitHub, and Location -->
+        <div class="contact-details">
+          <a href="https://www.linkedin.com/in/marktdem/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <span class="contact-divider">|</span>
+          <a href="https://github.com/MarkMcGuire801" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-location-dot"></i> Tucson, AZ</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation bar — Blog is marked active since all posts live here
+         links go up one level with ../ -->
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../blog.html" class="active">Blog</a>
+      <a href="../credentials.html">Credentials</a>
+      <a href="../references.html">References</a>
+    </nav>
+
+  </header>
+
+  <!-- ═══════════════════════════════
+       MAIN CONTENT
+       All page-specific content sits
+       inside this block
+  ═══════════════════════════════ -->
+  <main>
+
+    <!-- ═══════════════════════════════
+         POST HEADER
+         Update title, date, and category
+         for each new post
+    ═══════════════════════════════ -->
+    <div class="post-header">
+      <div class="blog-card-header">
+        <h1 class="post-title">POST TITLE HERE</h1>
+        <!-- Update category — e.g. Cybersecurity, Homelab, Career -->
+        <span class="blog-category">CATEGORY HERE</span>
+      </div>
+      <!-- Update date — e.g. January 1, 2026 -->
+      <p class="blog-date"><i class="fa fa-calendar"></i> DATE HERE</p>
+    </div>
+
+    <!-- ═══════════════════════════════
+         POST CONTENT
+         Write your post content here
+         using standard HTML tags:
+         <p> for paragraphs
+         <h2> for section headings
+         <ul> / <li> for bullet lists
+         <code> for inline code
+         <pre> for code blocks
+    ═══════════════════════════════ -->
+    <div class="post-content">
+      <p>Write your post content here.</p>
+    </div>
+
+    <!-- Back to blog link — returns visitor to the main blog feed -->
+    <a href="../blog.html" class="read-more-btn" style="margin-top: 2rem; display: inline-block;">
+      <i class="fa fa-arrow-left"></i> Back to Blog
+    </a>
+
+  </main>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+       Displays contact info and
+       copyright at the bottom of
+       every page
+  ═══════════════════════════════ -->
+  <footer>
+    <div class="footer-contact">
+      <!-- Quick contact info repeated from header for easy access -->
+      <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+      <span class="contact-divider">|</span>
+      <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+    </div>
+    <!-- Copyright line -->
+    <p>&copy; 2026 Mark McGuire</p>
+  </footer>
+
+</body>
+</html>

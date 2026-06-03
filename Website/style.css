@@ -1,0 +1,1111 @@
+/* ════════════════════════════════
+   RESET
+   Strips default browser styling
+   so layout behaves consistently
+   across all browsers
+════════════════════════════════ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ════════════════════════════════
+   VARIABLES
+   Central place to manage colors,
+   fonts, and theme values — update
+   here and it changes everywhere
+════════════════════════════════ */
+:root {
+  --bg:         #0d0d0d;   /* main page background */
+  --surface:    #1a1a1a;   /* slightly lighter surface (header, cards) */
+  --border:     #2a2a2a;   /* subtle border color */
+  --green:      #00ff00;   /* primary accent — terminal green */
+  --green-dim:  #ffffff;   /* white — used for labels and secondary accents */
+  --text:       #e0e0e0;   /* primary text */
+  --text-muted: #ffffff;   /* white — used for nav links and contact info */
+  --font:       'Courier New', Courier, monospace;  /* monospace for terminal feel */
+}
+
+
+/* ════════════════════════════════
+   GLOBAL
+   Base styles applied to the whole
+   page — background, text, font,
+   and minimum height
+════════════════════════════════ */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;      /* always fills full screen height */
+  display: flex;          /* enables footer pinning */
+  flex-direction: column; /* stacks header, main, footer vertically */
+  animation: fadeIn 0.2s ease-in;  /* short fade on every page load */
+}
+
+/* Fade in animation — reduces harsh flash when navigating between pages */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+/* ════════════════════════════════
+   HEADER
+   Top bar containing the site name,
+   contact info box, and navigation.
+   Top and right padding removed so
+   the contact box sits flush to the
+   top right corner of the page
+════════════════════════════════ */
+header {
+  padding: 0 0 1rem 2rem;           /* top/right padding removed for flush contact box */
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Flexbox row — pushes site name to the left
+   and contact info box flush to the top right */
+.header-top {
+  display: flex;
+  justify-content: space-between;   /* name left, contact box right */
+  align-items: flex-start;          /* pins both elements to the top edge */
+  margin-bottom: 0.75rem;
+}
+
+/* Site name — large white text above the nav */
+.site-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text);               /* white — intentionally not green */
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;                /* adds breathing room above the name */
+}
+
+
+/* ════════════════════════════════
+   CONTACT INFO BOX
+   Sits flush to the top right corner
+   of the header — contains a label,
+   phone, email, social links, and
+   location arranged in two rows
+════════════════════════════════ */
+.contact-info {
+  display: flex;
+  flex-direction: column;           /* stacks label on top of contact rows */
+  align-items: flex-start;          /* left aligns everything inside the box */
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background-color: var(--bg);      /* dark box contrasting against header surface */
+  border: 1px solid var(--border);  /* subtle border around the box */
+  border-top: none;                 /* removes top border so it sits flush at top */
+  border-right: none;               /* removes right border so it sits flush at right */
+  border-radius: 0 0 0 6px;        /* rounds only the bottom-left corner */
+  padding: 0.4rem 1rem;
+}
+
+/* "Contact Information" label above the details rows */
+.contact-info-label {
+  font-size: 0.75rem;               /* smaller than the contact details */
+  color: var(--green-dim);          /* white — matches updated theme */
+  text-transform: uppercase;        /* clean header label style */
+  letter-spacing: 0.1em;           /* spaced out letters for label feel */
+  border-bottom: 1px solid var(--border); /* separator line under the label */
+  width: 100%;                      /* stretches separator across the full box width */
+  padding-bottom: 0.3rem;
+  text-align: center;               /* centered within the box */
+}
+
+/* Each row of contact details —
+   Row 1: Phone | Email
+   Row 2: LinkedIn | GitHub | Location */
+.contact-details {
+  display: flex;
+  gap: 0.75rem;                     /* spacing between each item and divider */
+  flex-wrap: wrap;                  /* wraps to next line on smaller screens */
+  justify-content: flex-start;      /* left aligns items within each row */
+  align-items: center;              /* vertically centers items and dividers */
+  width: 100%;                      /* ensures row stretches full box width */
+}
+
+/* Links inside contact info — overrides browser default blue */
+.contact-info a {
+  color: var(--text-muted);         /* white — matches surrounding text */
+  text-decoration: none;
+  transition: color 0.2s;           /* smooth color transition on hover */
+}
+
+/* Contact links turn green on hover */
+.contact-info a:hover {
+  color: var(--green);
+}
+
+/* White pipe character used as a visual divider between contact items */
+.contact-divider {
+  color: var(--text);               /* white — stands out against contact text */
+  font-weight: bold;
+  user-select: none;                /* prevents | from being highlighted when selecting text */
+}
+
+
+/* ════════════════════════════════
+   NAVIGATION
+   Horizontal link bar below the
+   site name — highlights the active
+   page and responds to hover
+════════════════════════════════ */
+nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Default link style — white, no underline */
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding-bottom: 2px;
+  transition: color 0.2s;           /* smooth color transition on hover */
+}
+
+/* Nav link turns green on hover */
+nav a:hover {
+  color: var(--green);
+}
+
+/* Green text and underline on the current page link */
+nav a.active {
+  color: var(--green);
+  border-bottom: 2px solid var(--green);
+}
+
+/* White divider between nav items — skips the first item
+   so there's no leading divider on the left */
+nav a:not(:first-child) {
+  border-left: 3px solid var(--text);  /* white — matches contact info dividers */
+  padding-left: 1.5rem;
+}
+
+
+/* ════════════════════════════════
+   MAIN CONTENT
+   Wrapper for all page content —
+   centers it, limits max width for
+   readability, and stretches to
+   push the footer to the bottom
+════════════════════════════════ */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  flex: 1;                          /* stretches to fill space, pinning footer to bottom */
+}
+
+
+/* ════════════════════════════════
+   HERO SECTION
+   Full width intro block at the
+   top of the home page — contains
+   name, title, and tagline
+════════════════════════════════ */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem 0 2rem;        /* no bottom padding so line sits flush */
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+/* Large display name in the hero */
+.hero-name {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+/* Job title line below the name */
+.hero-title {
+  font-size: 1.1rem;
+  color: var(--green);              /* green to draw attention to the title */
+  margin-bottom: 1rem;
+}
+
+/* Short punchy tagline below the title */
+.hero-tagline {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+
+/* ════════════════════════════════
+   SECTION TITLES
+   Shared style for all h2 headings
+   used as section headers across
+   all pages — margin-top and
+   margin-bottom kept equal for
+   consistent spacing above and below
+════════════════════════════════ */
+.section-title {
+  font-size: 1.4rem;
+  color: var(--green);              /* green heading to match theme */
+  border-bottom: 1px solid var(--border);  /* underline separator */
+  padding-bottom: 0.5rem;           /* space between text and line below */
+  margin-top: 1rem;                 /* even space above the title */
+  margin-bottom: 1rem;              /* even space below the title */
+}
+
+
+/* ════════════════════════════════
+   ABOUT SECTION
+   Personal summary paragraph block
+   below the hero on the home page
+════════════════════════════════ */
+.about {
+  margin-bottom: 3rem;
+}
+
+/* Spacing between paragraphs in the about section */
+.about p {
+  margin-bottom: 1rem;
+}
+
+
+/* ════════════════════════════════
+   RESUME / SKILLS TABS
+   Tabbed panel on the home page
+   containing the embedded resume
+   PDF and skills grid — tabs are
+   centered and larger for easy
+   clicking
+════════════════════════════════ */
+
+/* Centered tab button row sitting above the panel */
+.tab-bar {
+  display: flex;
+  justify-content: center;          /* centers the tabs horizontally */
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);  /* line under the tab row */
+}
+
+/* Individual tab button — larger font and padding than default */
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;   /* transparent until active */
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 1.1rem;                /* larger than default for readability */
+  padding: 0.8rem 2.5rem;           /* generous padding for easy clicking */
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+/* Tab button hover state */
+.tab-btn:hover {
+  color: var(--green);
+}
+
+/* Active tab — green text and green underline border */
+.tab-btn.active {
+  color: var(--green);
+  border-bottom: 3px solid var(--green);
+}
+
+/* Hides inactive tab panels */
+.hidden {
+  display: none;
+}
+
+/* Download button sitting above the embedded PDF */
+.resume-download {
+  margin-bottom: 1rem;
+}
+
+/* Styled download link — green outlined button */
+.download-btn {
+  display: inline-block;
+  color: var(--green);
+  border: 1px solid var(--green);   /* green outlined button */
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Download button fills green on hover */
+.download-btn:hover {
+  background-color: var(--green);
+  color: var(--bg);                 /* dark text on green background */
+}
+
+/* Embedded PDF viewer — fills full width and most of screen height */
+.resume-embed {
+  width: 100%;
+  height: calc(100vh - 200px);      /* dynamically fills most of the screen height */
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+
+/* ════════════════════════════════
+   SKILLS GRID
+   Two column grid layout for the
+   skills tab — each card holds one
+   skill category with labeled groups
+════════════════════════════════ */
+
+/* Two column grid — switches to single column on small screens */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* two equal columns */
+  gap: 1.5rem;
+}
+
+/* Individual skill category card */
+.skill-card {
+  background-color: var(--surface);       /* slightly lighter than page background */
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem;
+}
+
+/* Full width card — spans both columns, used for Networking */
+.skill-card-full {
+  grid-column: 1 / -1;                    /* stretches across all columns */
+}
+
+/* Category title at the top of each card */
+.skill-card-title {
+  font-size: 1rem;
+  color: var(--green);                    /* green to match section titles */
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Individual labeled group within a card */
+.skill-group {
+  margin-bottom: 0.75rem;
+}
+
+/* Proficiency label — Familiar, Some Use, etc. */
+.skill-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;                 /* spaced out for label style */
+  margin-bottom: 0.2rem;
+}
+
+/* Show more / show less toggle button */
+.show-more-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+/* Show more button turns green on hover */
+.show-more-btn:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* Responsive — single column on smaller screens */
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: 1fr;           /* stacks to single column on mobile */
+  }
+}
+
+
+/* ════════════════════════════════
+   FOOTER
+   Sits at the bottom of every page —
+   pinned down even on short pages
+   that don't fill the screen
+════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 1.5rem 2rem;
+  background-color: var(--surface);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Quick contact line sitting above the copyright in the footer */
+.footer-contact {
+  display: flex;
+  justify-content: center;          /* centers the contact info horizontally */
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;            /* breathing room above the copyright line */
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+
+/* ════════════════════════════════
+   BLOG PAGE
+   Single column feed of blog post
+   cards — newest post at the top
+════════════════════════════════ */
+
+/* Outer wrapper for all blog cards */
+.blog-feed {
+  display: flex;
+  flex-direction: column;           /* stacks cards vertically */
+  gap: 1.5rem;                      /* breathing room between cards */
+}
+
+/* Individual blog post card */
+.blog-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Card header row — title left, category tag right */
+.blog-card-header {
+  display: flex;
+  justify-content: space-between;   /* title left, tag right */
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Post title */
+.blog-title {
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+/* Category tag pill — used on blog cards */
+.blog-category {
+  font-size: 0.75rem;
+  color: var(--green);
+  border: 1px solid var(--green);   /* green outlined pill */
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;              /* prevents tag from wrapping */
+}
+
+/* Category tag pill — used on project cards */
+.project-category {
+  font-size: 0.75rem;
+  color: var(--green);
+  border: 1px solid var(--green);   /* green outlined pill — mirrors blog-category */
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;              /* prevents tag from wrapping */
+}
+
+/* Post date line */
+.blog-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Short summary paragraph */
+.blog-summary {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Read More / View Project button — shared across blog and project cards */
+.read-more-btn {
+  display: inline-block;
+  color: var(--green);
+  border: 1px solid var(--green);   /* green outlined button */
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  align-self: flex-start;           /* prevents button from stretching full width */
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Button fills green on hover */
+.read-more-btn:hover {
+  background-color: var(--green);
+  color: var(--bg);                 /* dark text on green background */
+}
+
+
+/* ════════════════════════════════
+   BLOG POST PAGE
+   Styles for individual post pages
+   inside the blog-posts/ folder
+════════════════════════════════ */
+
+/* Post header block — title, category, and date */
+.post-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Large post title at the top of the post page */
+.post-title {
+  font-size: 1.8rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+/* Post content area — all the written content */
+.post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;                        /* spacing between paragraphs and sections */
+  line-height: 1.8;
+}
+
+/* Section headings within a post */
+.post-content h2 {
+  font-size: 1.2rem;
+  color: var(--green);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+  margin-top: 1rem;
+}
+
+/* Inline code styling */
+.post-content code {
+  background-color: var(--surface);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+/* Code block styling */
+.post-content pre {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;                 /* horizontal scroll for long code lines */
+  font-size: 0.85rem;
+}
+
+/* Bullet lists within a post */
+.post-content ul {
+  padding-left: 1.5rem;
+}
+
+/* Spacing between list items */
+.post-content li {
+  margin-bottom: 0.4rem;
+}
+
+
+/* ════════════════════════════════
+   PROJECTS PAGE
+   Single column feed of project
+   cards with color coded status tags
+════════════════════════════════ */
+
+/* Outer wrapper for all project cards */
+.project-feed {
+  display: flex;
+  flex-direction: column;           /* stacks cards vertically */
+  gap: 1.5rem;                      /* breathing room between cards */
+}
+
+/* Individual project card */
+.project-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Card header row — title left, tags right */
+.project-card-header {
+  display: flex;
+  justify-content: space-between;   /* title left, tags right */
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Project title */
+.project-title {
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+/* Wrapper for status and category tags */
+.project-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Base status tag style — color overridden per status below */
+.status-tag {
+  font-size: 0.75rem;
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+  border: 1px solid;                /* border color set per status */
+}
+
+/* Complete — green */
+.status-tag.complete {
+  color: #00ff00;
+  border-color: #00ff00;
+}
+
+/* In Progress — amber */
+.status-tag.in-progress {
+  color: #f0a500;
+  border-color: #f0a500;
+}
+
+/* Planned — gray */
+.status-tag.planned {
+  color: #888888;
+  border-color: #888888;
+}
+
+/* Project summary paragraph */
+.project-summary {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+
+/* ════════════════════════════════
+   PROJECT POST PAGE
+   Styles for individual project
+   writeup pages in project-posts/
+════════════════════════════════ */
+
+/* ── Image Grid ──
+   Responsive grid of screenshots
+   that open in the lightbox on click */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* responsive columns */
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Wrapper for each image and its caption */
+.grid-img-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Grid image — clicking opens lightbox */
+.grid-img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  cursor: pointer;                  /* pointer cursor signals clickability */
+  transition: opacity 0.2s;
+}
+
+/* Dim image slightly on hover to signal it is clickable */
+.grid-img:hover {
+  opacity: 0.8;
+}
+
+/* Caption below each grid image */
+.img-caption {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+
+/* ── Lightbox ──
+   Fullscreen overlay that appears
+   when a grid image is clicked */
+.lightbox {
+  display: none;                    /* hidden until active class is added */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.92);  /* near black overlay */
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Show the lightbox when active class is added by JavaScript */
+.lightbox.active {
+  display: flex;
+}
+
+/* Expanded image inside the lightbox */
+.lightbox-img {
+  max-width: 90%;
+  max-height: 75vh;                 /* keeps image within viewport height */
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* Caption below the lightbox image */
+.lightbox-caption {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Base style for all lightbox navigation buttons */
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: fixed;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.2rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+/* Lightbox buttons turn green on hover */
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* Close button — top right corner */
+.lightbox-close {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+/* Previous button — left center */
+.lightbox-prev {
+  top: 50%;
+  left: 1.5rem;
+  transform: translateY(-50%);
+}
+
+/* Next button — right center */
+.lightbox-next {
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+}
+
+
+/* ── Slideshow ──
+   Image slideshow with previous
+   and next navigation buttons */
+.slideshow-container {
+  position: relative;               /* positions buttons relative to container */
+  display: inline-block;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Slideshow image */
+.slideshow-img {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+/* Base style for slideshow navigation buttons */
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);  /* semi transparent dark background */
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+/* Slideshow buttons turn green on hover */
+.slide-btn:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* Previous button — left edge of slideshow */
+.slide-prev {
+  left: 0.75rem;
+}
+
+/* Next button — right edge of slideshow */
+.slide-next {
+  right: 0.75rem;
+}
+
+/* Slide counter — e.g. 1 / 3 */
+.slide-counter {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+
+/* ── Video Embed ──
+   Responsive YouTube video wrapper
+   that maintains 16:9 aspect ratio */
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;           /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  margin-top: 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* YouTube iframe fills the wrapper */
+.video-embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+/* ════════════════════════════════
+   CREDENTIALS PAGE
+   Certifications grouped by issuer —
+   each group has a header with a
+   verify link and a grid of cert cards
+════════════════════════════════ */
+
+/* Outer wrapper for all issuer groups */
+.credentials-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;                            /* breathing room between issuer groups */
+}
+
+/* Individual issuer group — header plus cert card grid */
+.issuer-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Issuer header row — name left, verify link right */
+.issuer-header {
+  display: flex;
+  justify-content: space-between;       /* name left, verify link right */
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+/* Issuer name — green to match section titles */
+.issuer-name {
+  font-size: 1.2rem;
+  color: var(--green);
+}
+
+/* Verification link next to issuer name */
+.verify-link {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+/* Verify link turns green on hover */
+.verify-link:hover {
+  color: var(--green);
+}
+
+/* Grid of cert cards — wraps automatically based on available width */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* responsive columns */
+  gap: 1rem;
+}
+
+/* Individual cert card */
+.cert-card {
+  background-color: var(--surface);     /* slightly lighter than page background */
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Cert name at top of card */
+.cert-name {
+  font-size: 0.95rem;
+  color: var(--green);
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+/* Each detail row — label and value side by side */
+.cert-detail {
+  display: flex;
+  justify-content: space-between;       /* label left, value right */
+  align-items: center;
+  font-size: 0.8rem;
+  gap: 0.5rem;
+}
+
+/* Detail label — Active, Expires, Code */
+.cert-label {
+  color: var(--text-muted);
+  white-space: nowrap;                  /* prevents label from wrapping */
+}
+
+/* Verification code — monospace for readability */
+.cert-code {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  color: var(--text);
+  word-break: break-all;                /* breaks long codes onto next line if needed */
+  text-align: right;
+}
+
+
+/* ════════════════════════════════
+   REFERENCES PAGE
+   Single column feed of reference
+   cards — each card has an avatar,
+   name, title, relationship, and
+   a quote/testimonial
+════════════════════════════════ */
+
+/* Privacy note at the top of the page */
+.references-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);  /* subtle box around the note */
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Outer wrapper for all reference cards */
+.references-feed {
+  display: flex;
+  flex-direction: column;           /* stacks cards vertically */
+  gap: 1.5rem;                      /* breathing room between cards */
+}
+
+/* Individual reference card */
+.reference-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Top section of the card — avatar and info side by side */
+.reference-header {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Row containing avatar and text info */
+.reference-identity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Initials circle avatar */
+.reference-avatar {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;                  /* prevents shrinking on small screens */
+  border-radius: 50%;               /* makes it a circle */
+  background-color: var(--bg);
+  border: 1px solid var(--green);   /* green border to match theme */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--green);              /* green initials */
+}
+
+/* Text block next to the avatar */
+.reference-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* Reference name */
+.reference-name {
+  font-size: 1rem;
+  color: var(--text);
+}
+
+/* Job title and company */
+.reference-title {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Relationship label — e.g. Direct Supervisor */
+.reference-relationship {
+  font-size: 0.8rem;
+  color: var(--green-dim);          /* white — matches updated theme */
+}
+
+/* Testimonial quote block */
+.reference-quote {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.7;
+  border-left: 3px solid var(--green);  /* green left border for blockquote style */
+  padding-left: 1rem;
+  margin: 0;
+  font-style: italic;
+}
