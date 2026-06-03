@@ -1207,10 +1207,12 @@ footer {
     justify-content: flex-start;      /* starts items from the left edge */
   }
 
-  /* Remove all left spacing from non-first nav items on mobile */
+  /* Remove left border divider from non-first nav items —
+     padding-left kept at 0.5rem to match right side and
+     keep text centered within each button */
   nav a:not(:first-child) {
     border-left: none;                /* dividers don't make sense when wrapping */
-    padding-left: 0;
+    padding-left: 0.5rem;             /* matches right padding to keep text centered */
     margin-left: 0;                   /* explicitly zero out any margin */
   }
 
