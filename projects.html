@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding — ensures special characters display correctly -->
+  <meta charset="UTF-8" />
+  <!-- Responsive viewport — makes the page scale correctly on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page title — shows in the browser tab and search engine results -->
+  <title>Mark McGuire - Projects</title>
+  <!-- Font Awesome — loaded before style.css so our styles can override if needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Shared stylesheet — loads last so it takes priority over external libraries -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════
+       HEADER
+       Contains site name, contact info
+       box, and main navigation
+  ═══════════════════════════════ -->
+  <header>
+
+    <!-- Top row: site name left, contact info box flush to top right -->
+    <div class="header-top">
+
+      <!-- Site name — white text, large font -->
+      <div class="site-name">Mark McGuire</div>
+
+      <!-- Contact info box — sits flush to top right of header -->
+      <div class="contact-info">
+
+        <!-- Label above the contact details -->
+        <div class="contact-info-label">Contact Information</div>
+
+        <!-- Row 1: Phone and Email -->
+        <div class="contact-details">
+          <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+        </div>
+
+        <!-- Row 2: LinkedIn, GitHub, and Location -->
+        <div class="contact-details">
+          <a href="https://www.linkedin.com/in/marktdem/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <span class="contact-divider">|</span>
+          <a href="https://github.com/MarkMcGuire801" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-location-dot"></i> Tucson, AZ</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation bar — class="active" marks the current page -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="blog.html">Blog</a>
+      <a href="credentials.html">Credentials</a>
+      <a href="references.html">References</a>
+    </nav>
+
+  </header>
+
+  <!-- ═══════════════════════════════
+       MAIN CONTENT
+       All page-specific content sits
+       inside this block
+  ═══════════════════════════════ -->
+  <main>
+
+    <!-- Page heading — identifies the current page for the visitor -->
+    <h2 class="section-title">Projects</h2>
+
+    <!-- ═══════════════════════════════
+         PROJECT FEED
+         Single column list of project
+         cards — to add a new project:
+         1. Copy project-post-template.html
+         2. Save it in project-posts/ folder
+         3. Copy a card block below and
+            update the title, status,
+            category, summary, and href
+    ═══════════════════════════════ -->
+    <div class="project-feed">
+
+      <!-- ── Project 1 ── -->
+      <div class="project-card">
+
+        <!-- Card header — title left, status and category tags right -->
+        <div class="project-card-header">
+          <h3 class="project-title">Home Lab Security Environment</h3>
+          <div class="project-tags">
+            <!-- Status tag options: complete, in-progress, planned -->
+            <span class="status-tag complete">Complete</span>
+            <!-- Category tag — describes the type of project -->
+            <span class="project-category">Homelab</span>
+          </div>
+        </div>
+
+        <!-- Short summary of the project -->
+        <p class="project-summary">
+          Built an isolated home lab environment using ProxMox for virtualization,
+          configured with VLANs for network segmentation. Used the environment to
+          practice deploying and configuring security tools including Wazuh, Kali
+          Linux, and DVWA in a safe controlled setting.
+        </p>
+
+        <!-- Link to the full project writeup page -->
+        <a href="project-posts/home-lab-security-environment.html" class="read-more-btn">
+          <i class="fa fa-arrow-right"></i> View Project
+        </a>
+
+      </div>
+
+      <!-- ── Project 2 ── -->
+      <div class="project-card">
+
+        <!-- Card header — title left, status and category tags right -->
+        <div class="project-card-header">
+          <h3 class="project-title">Network Engineering Capstone</h3>
+          <div class="project-tags">
+            <span class="status-tag complete">Complete</span>
+            <span class="project-category">Network Engineering</span>
+          </div>
+        </div>
+
+        <!-- Short summary of the project -->
+        <p class="project-summary">
+          Designed and implemented a full enterprise network topology using Cisco
+          Packet Tracer. The project covered hierarchical network design, OSPF and
+          eBGP routing, VLANs, IPSec VPN, and security hardening including ACLs,
+          DHCP Snooping, and Dynamic ARP Inspection.
+        </p>
+
+        <!-- Link to the full project writeup page -->
+        <a href="project-posts/network-engineering-capstone.html" class="read-more-btn">
+          <i class="fa fa-arrow-right"></i> View Project
+        </a>
+
+      </div>
+
+      <!-- ── Project 3 ── -->
+      <div class="project-card">
+
+        <!-- Card header — title left, status and category tags right -->
+        <div class="project-card-header">
+          <h3 class="project-title">Active Directory Hardening Lab</h3>
+          <div class="project-tags">
+            <span class="status-tag in-progress">In Progress</span>
+            <span class="project-category">Cybersecurity</span>
+          </div>
+        </div>
+
+        <!-- Short summary of the project -->
+        <p class="project-summary">
+          Setting up a Windows Active Directory environment in Hyper-V to practice
+          hardening techniques including Group Policy configuration, tiered admin
+          model implementation, and detection of common AD attack vectors using
+          BloodHound and Sysmon.
+        </p>
+
+        <!-- Link to the full project writeup page -->
+        <a href="project-posts/active-directory-hardening-lab.html" class="read-more-btn">
+          <i class="fa fa-arrow-right"></i> View Project
+        </a>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+       Displays contact info and
+       copyright at the bottom of
+       every page
+  ═══════════════════════════════ -->
+  <footer>
+    <div class="footer-contact">
+      <!-- Quick contact info repeated from header for easy access -->
+      <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+      <span class="contact-divider">|</span>
+      <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+    </div>
+    <!-- Copyright line -->
+    <p>&copy; 2026 Mark McGuire</p>
+  </footer>
+
+</body>
+</html>
