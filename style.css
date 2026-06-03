@@ -1184,33 +1184,38 @@ footer {
      multiple lines on narrow screens */
   nav {
     flex-wrap: wrap;                  /* allows links to wrap to next line */
-    gap: 0.4rem;                      /* tighter gap between nav items */
-    padding-left: 0;                  /* removes any inherited left padding */
+    gap: 0.4rem;
+    padding: 0;                       /* remove all padding */
+    margin: 0;                        /* remove all margin */
     width: 100%;
     box-sizing: border-box;
+    align-items: flex-start;          /* aligns wrapped rows to the left */
+    justify-content: flex-start;      /* starts items from the left edge */
   }
 
   /* Remove all left spacing from non-first nav items on mobile */
   nav a:not(:first-child) {
-    border-left: none;                /* dividers don't make sense when wrapping */
+    border-left: none;
     padding-left: 0;
-    margin-left: 0;                   /* explicitly zero out any margin */
+    margin-left: 0;
   }
 
   /* Smaller bordered nav links on mobile */
   nav a {
     border: 1px solid var(--border);
-    padding: 0.25rem 0.5rem;          /* tighter padding on nav links */
+    padding: 0.25rem 0.5rem;
     border-radius: 4px;
-    font-size: 0.8rem;                /* smaller font to fit more on one line */
-    margin: 0;                        /* zero out any inherited margin */
-    box-sizing: border-box;           /* includes border in size calculation */
+    font-size: 0.8rem;
+    margin: 0;
+    box-sizing: border-box;
+    display: inline-block;            /* ensures border wraps tightly around text */
   }
 
   /* Keep active link styled correctly on mobile */
   nav a.active {
     border-color: var(--green);
-    border-bottom: 1px solid var(--green);  /* override desktop underline style */
+    border-bottom: 1px solid var(--green);
+    color: var(--green);
   }
 
 
