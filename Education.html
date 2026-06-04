@@ -1,158 +1,385 @@
-/* ════════════════════════════════
-   EDUCATION PAGE
-   Tabbed layout with one panel per
-   degree — courses shown in a list
-   with cert alignments noted and a
-   collapsible overflow for long lists
-════════════════════════════════ */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding — ensures special characters display correctly -->
+  <meta charset="UTF-8" />
+  <!-- Responsive viewport — makes the page scale correctly on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page title — shows in the browser tab and search engine results -->
+  <title>Mark McGuire - Education</title>
+  <!-- Font Awesome — loaded before style.css so our styles can override if needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Shared stylesheet — loads last so it takes priority over external libraries -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-/* Individual degree card — wraps all
-   content for one degree */
-.education-card {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
+  <!-- ═══════════════════════════════
+       HEADER
+       Contains site name, contact info
+       box, and main navigation
+  ═══════════════════════════════ -->
+  <header>
 
-/* Degree header block — title row,
-   institution, and dates */
-.education-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 1rem;
-}
+    <!-- Top row: site name left, contact info box flush to top right -->
+    <div class="header-top">
 
-/* Row containing degree title and status tag */
-.education-title-row {
-  display: flex;
-  justify-content: space-between;   /* title left, status tag right */
-  align-items: flex-start;
-  gap: 1rem;
-}
+      <!-- Site name — white text, large font -->
+      <div class="site-name">Mark McGuire</div>
 
-/* Degree name */
-.education-degree {
-  font-size: 1.1rem;
-  color: var(--text);
-}
+      <!-- Contact info box — sits flush to top right of header -->
+      <div class="contact-info">
 
-/* Institution name line */
-.education-institution {
-  font-size: 0.9rem;
-  color: var(--green);              /* green to match theme accents */
-}
+        <!-- Label above the contact details -->
+        <div class="contact-info-label">Contact Information</div>
 
-/* Conferred or expected date line */
-.education-dates {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
+        <!-- Row 1: Phone and Email -->
+        <div class="contact-details">
+          <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+        </div>
 
-/* Note block — used for in progress
-   programs to explain status */
-.education-note {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--green-dim); /* left accent to draw attention */
-  border-radius: 4px;
-  padding: 0.6rem 1rem;
-  line-height: 1.6;
-}
+        <!-- Row 2: LinkedIn, GitHub, and Location -->
+        <div class="contact-details">
+          <a href="https://www.linkedin.com/in/marktdem/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <span class="contact-divider">|</span>
+          <a href="https://github.com/MarkMcGuire801" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-location-dot"></i> Tucson, AZ</span>
+        </div>
 
-/* Achievements block — used for
-   honors and awards */
-.education-achievements {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
+      </div>
+    </div>
 
-/* Achievement list — icons and text */
-.achievement-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 0.9rem;
-}
+    <!-- Navigation bar — class="active" marks the current page -->
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="blog.html">Blog</a>
+      <a href="education.html" class="active">Education</a>
+      <a href="credentials.html">Credentials</a>
+      <a href="references.html">References</a>
+    </nav>
 
-/* Each achievement item */
-.achievement-list li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text);
-}
+  </header>
 
-/* Achievement icon — gold for trophy,
-   green for academic awards */
-.achievement-list .fa-trophy {
-  color: #f0a500;                   /* amber — matches in-progress tag color */
-}
+  <!-- ═══════════════════════════════
+       MAIN CONTENT
+       All page-specific content sits
+       inside this block
+  ═══════════════════════════════ -->
+  <main>
 
-.achievement-list .fa-award {
-  color: var(--green);
-}
+    <!-- Page heading — identifies the current page for the visitor -->
+    <h2 class="section-title">Education</h2>
 
-/* Coursework section heading */
-.education-courses-title {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;           /* spaced out for label style */
-  margin-bottom: 0.5rem;
-}
+    <!-- ═══════════════════════════════
+         EDUCATION TABS
+         Three centered tabs — one per
+         degree. Page lands on the Masters
+         tab by default. Tab switching is
+         handled by the JavaScript at the
+         bottom of the page
+    ═══════════════════════════════ -->
+    <div class="tab-bar">
+      <!-- Active by default — Masters loads first -->
+      <button class="tab-btn active" onclick="switchTab('masters', event)">
+        <i class="fa fa-graduation-cap"></i> MS Cybersecurity
+      </button>
+      <button class="tab-btn" onclick="switchTab('wgu', event)">
+        <i class="fa fa-graduation-cap"></i> BS Network Engineering
+      </button>
+      <button class="tab-btn" onclick="switchTab('uofa', event)">
+        <i class="fa fa-graduation-cap"></i> BS Business Administration
+      </button>
+    </div>
 
-/* Course list — no bullet points,
-   each item is a row */
-.course-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
 
-/* Each course row — name left,
-   cert alignment right */
-.course-list li {
-  display: flex;
-  justify-content: space-between;   /* course name left, cert tag right */
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border); /* separator between courses */
-  font-size: 0.9rem;
-}
+    <!-- ═══════════════════════════════
+         MASTERS TAB
+         WGU MS Cybersecurity and
+         Information Assurance — shown
+         by default when page loads
+    ═══════════════════════════════ -->
+    <div class="tab-panel" id="tab-masters">
+      <div class="education-card">
 
-/* Course name */
-.course-name {
-  color: var(--text);
-}
+        <!-- Degree header — institution, status tag, and dates -->
+        <div class="education-header">
+          <div class="education-title-row">
+            <h3 class="education-degree">Master of Science in Cybersecurity and Information Assurance</h3>
+            <span class="status-tag in-progress">In Progress</span>
+          </div>
+          <p class="education-institution"><i class="fa fa-university"></i> Western Governors University</p>
+          <p class="education-dates"><i class="fa fa-calendar"></i> Starting July 1, 2026 — Expected December 31, 2027</p>
+        </div>
 
-/* Cert alignment tag — green pill */
-.course-cert {
-  font-size: 0.75rem;
-  color: var(--green);
-  border: 1px solid var(--green);
-  border-radius: 20px;
-  padding: 0.15rem 0.6rem;
-  white-space: nowrap;              /* prevents tag from wrapping */
-}
+        <!-- Program note — explains in progress status and exemption -->
+        <div class="education-note">
+          <i class="fa fa-circle-info"></i> This program has not yet begun. All coursework and associated
+          certifications listed below are planned. Upon enrollment, credit for Security Foundations
+          was granted based on existing CompTIA Network+ and Security+ certifications.
+        </div>
 
-/* Exemption tag — muted style since
-   it indicates a waived requirement */
-.course-exemption {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 0.15rem 0.6rem;
-  white-space: nowrap;
-}
+        <!-- Course list — first 3 visible, rest collapsed -->
+        <div class="education-courses">
+          <h4 class="education-courses-title">Coursework</h4>
+
+          <!-- Always visible courses -->
+          <ul class="course-list">
+            <li>
+              <span class="course-name">Security Foundations</span>
+              <span class="course-exemption"><i class="fa fa-check-circle"></i> Exempted via CompTIA Network+ &amp; Security+</span>
+            </li>
+            <li>
+              <span class="course-name">Security Operations</span>
+              <span class="course-cert">Aligned with: CompTIA CySA+</span>
+            </li>
+            <li>
+              <span class="course-name">Governance, Risk, and Compliance</span>
+            </li>
+          </ul>
+
+          <!-- Collapsed courses — shown on click -->
+          <ul class="course-list course-overflow hidden" id="masters-overflow">
+            <li><span class="course-name">Hacking Countermeasures and Techniques</span></li>
+            <li><span class="course-name">Network Design and Management</span></li>
+            <li>
+              <span class="course-name">Penetration Testing</span>
+              <span class="course-cert">Aligned with: CompTIA PenTest+</span>
+            </li>
+            <li><span class="course-name">Software Defined Networking</span></li>
+            <li><span class="course-name">Web and Cloud Security</span></li>
+            <li><span class="course-name">Secure Systems Analysis and Design</span></li>
+            <li>
+              <span class="course-name">Cybersecurity Architecture and Engineering</span>
+              <span class="course-cert">Aligned with: CompTIA SecurityX / CASP+</span>
+            </li>
+            <li>
+              <span class="course-name">Cybersecurity Management</span>
+              <span class="course-cert">Aligned with: ISACA CISM</span>
+            </li>
+            <li><span class="course-name">Cybersecurity Graduate Capstone</span></li>
+          </ul>
+
+          <!-- Show more / show less toggle -->
+          <button class="show-more-btn" onclick="toggleOverflow('masters-overflow', this)">
+            <i class="fa fa-chevron-down"></i> Show More
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════
+         WGU BACHELORS TAB
+         WGU BS Network Engineering
+         and Security — hidden by default
+    ═══════════════════════════════ -->
+    <div class="tab-panel hidden" id="tab-wgu">
+      <div class="education-card">
+
+        <!-- Degree header — institution and dates -->
+        <div class="education-header">
+          <div class="education-title-row">
+            <h3 class="education-degree">Bachelor of Science in Network Engineering and Security</h3>
+            <span class="status-tag complete">Complete</span>
+          </div>
+          <p class="education-institution"><i class="fa fa-university"></i> Western Governors University</p>
+          <p class="education-dates"><i class="fa fa-calendar"></i> Conferred May 14, 2026</p>
+        </div>
+
+        <!-- Course list — first 3 visible, rest collapsed -->
+        <div class="education-courses">
+          <h4 class="education-courses-title">Coursework</h4>
+
+          <!-- Always visible courses -->
+          <ul class="course-list">
+            <li>
+              <span class="course-name">IT Foundations</span>
+              <span class="course-cert">Aligned with: CompTIA A+ Core 1</span>
+            </li>
+            <li>
+              <span class="course-name">IT Applications</span>
+              <span class="course-cert">Aligned with: CompTIA A+ Core 2</span>
+            </li>
+            <li><span class="course-name">Network and Security Foundations</span></li>
+          </ul>
+
+          <!-- Collapsed courses — shown on click -->
+          <ul class="course-list course-overflow hidden" id="wgu-overflow">
+            <li>
+              <span class="course-name">Business of IT Applications</span>
+              <span class="course-cert">Aligned with: ITIL Foundation v4</span>
+            </li>
+            <li><span class="course-name">Web Development Foundations</span></li>
+            <li>
+              <span class="course-name">Networks</span>
+              <span class="course-cert">Aligned with: CompTIA Network+</span>
+            </li>
+            <li>
+              <span class="course-name">Linux Foundations</span>
+              <span class="course-cert">Aligned with: LPI Linux Essentials</span>
+            </li>
+            <li><span class="course-name">Network Analytics and Troubleshooting</span></li>
+            <li><span class="course-name">Introduction to Cryptography</span></li>
+            <li><span class="course-name">Managing Cloud Security</span></li>
+            <li>
+              <span class="course-name">Network and Security Applications</span>
+              <span class="course-cert">Aligned with: CompTIA Security+</span>
+            </li>
+            <li><span class="course-name">Scripting and Programming Foundations</span></li>
+            <li>
+              <span class="course-name">Cloud Applications</span>
+              <span class="course-cert">Aligned with: CompTIA Cloud+</span>
+            </li>
+            <li><span class="course-name">Internet of Things (IoT) and Infrastructure</span></li>
+            <li><span class="course-name">Data Management Foundations</span></li>
+            <li><span class="course-name">Telecomm and Wireless Communications</span></li>
+            <li><span class="course-name">Version Control</span></li>
+            <li><span class="course-name">Software Defined Networking</span></li>
+            <li><span class="course-name">Network Automation and Deployment</span></li>
+            <li><span class="course-name">Python for IT Automation</span></li>
+            <li><span class="course-name">Network Engineering and Security Capstone Project</span></li>
+          </ul>
+
+          <!-- Show more / show less toggle -->
+          <button class="show-more-btn" onclick="toggleOverflow('wgu-overflow', this)">
+            <i class="fa fa-chevron-down"></i> Show More
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════
+         UOFA BACHELORS TAB
+         University of Arizona BS
+         Business Administration —
+         hidden by default
+    ═══════════════════════════════ -->
+    <div class="tab-panel hidden" id="tab-uofa">
+      <div class="education-card">
+
+        <!-- Degree header — institution, honors, and dates -->
+        <div class="education-header">
+          <div class="education-title-row">
+            <h3 class="education-degree">Bachelor of Science in Business Administration</h3>
+            <span class="status-tag complete">Complete</span>
+          </div>
+          <p class="education-institution"><i class="fa fa-university"></i> University of Arizona — Eller College of Management</p>
+          <p class="education-dates"><i class="fa fa-calendar"></i> Conferred December 16, 2022</p>
+        </div>
+
+        <!-- Academic achievements and honors -->
+        <div class="education-achievements">
+          <h4 class="education-courses-title">Achievements</h4>
+          <ul class="achievement-list">
+            <li><i class="fa fa-award"></i> Graduated Cum Laude</li>
+            <li><i class="fa fa-award"></i> Dean's List — Fall 2022</li>
+            <li><i class="fa fa-award"></i> Honorable Mention — Fall 2021</li>
+            <li><i class="fa fa-trophy"></i> Fall 2021 Eller Business Communications Case Competition Winner</li>
+          </ul>
+        </div>
+
+        <!-- Course list — first 3 visible, rest collapsed -->
+        <div class="education-courses">
+          <h4 class="education-courses-title">Coursework</h4>
+
+          <!-- Always visible courses -->
+          <ul class="course-list">
+            <li><span class="course-name">Intermediate Accounting for Business Administration Majors</span></li>
+            <li><span class="course-name">Business Communication</span></li>
+            <li><span class="course-name">Organizational Behavior and Management</span></li>
+          </ul>
+
+          <!-- Collapsed courses — shown on click -->
+          <ul class="course-list course-overflow hidden" id="uofa-overflow">
+            <li><span class="course-name">Introduction to HR Management</span></li>
+            <li><span class="course-name">Microeconomic Analysis for Business Decisions</span></li>
+            <li><span class="course-name">Economic Strategy: Business Decisions</span></li>
+            <li><span class="course-name">Use and Managing Information Systems</span></li>
+            <li><span class="course-name">Project Management</span></li>
+            <li><span class="course-name">Macroeconomics, Global Institutions and Policy</span></li>
+            <li><span class="course-name">Innovation Principles and Environment</span></li>
+            <li><span class="course-name">Integrative Business Foundations with Ethics</span></li>
+            <li><span class="course-name">Basic Operations Management</span></li>
+            <li><span class="course-name">Beginning Spanish I</span></li>
+            <li><span class="course-name">Beginning Spanish II</span></li>
+            <li><span class="course-name">Introduction to Finance</span></li>
+            <li><span class="course-name">Real Estate Finance and Investment</span></li>
+            <li><span class="course-name">Introduction to Marketing</span></li>
+            <li><span class="course-name">Marketing Analytics</span></li>
+          </ul>
+
+          <!-- Show more / show less toggle -->
+          <button class="show-more-btn" onclick="toggleOverflow('uofa-overflow', this)">
+            <i class="fa fa-chevron-down"></i> Show More
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+       Displays contact info and
+       copyright at the bottom of
+       every page
+  ═══════════════════════════════ -->
+  <footer>
+    <div class="footer-contact">
+      <!-- Quick contact info repeated from header for easy access -->
+      <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+      <span class="contact-divider">|</span>
+      <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+    </div>
+    <!-- Copyright line -->
+    <p>&copy; 2026 Mark McGuire</p>
+  </footer>
+
+  <!-- ═══════════════════════════════
+       JAVASCRIPT
+       Handles tab switching between
+       the three degree panels and
+       toggles the collapsible course
+       overflow sections
+  ═══════════════════════════════ -->
+  <script>
+
+    /* switchTab(tab, event)
+       tab: string — "masters", "wgu", or "uofa"
+       event: the click event from the button
+       Removes active class from all tab buttons,
+       hides all panels, then shows the selected
+       panel and marks its button as active */
+    function switchTab(tab, event) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+      document.getElementById('tab-' + tab).classList.remove('hidden');
+      event.target.closest('.tab-btn').classList.add('active');
+    }
+
+    /* toggleOverflow(id, btn)
+       id: string — the id of the overflow ul to toggle
+       btn: the button element that was clicked
+       Toggles the hidden class on the overflow list
+       and updates the button text and icon to match */
+    function toggleOverflow(id, btn) {
+      const panel = document.getElementById(id);
+      const isHidden = panel.classList.contains('hidden');
+      panel.classList.toggle('hidden');
+      btn.innerHTML = isHidden
+        ? '<i class="fa fa-chevron-up"></i> Show Less'
+        : '<i class="fa fa-chevron-down"></i> Show More';
+    }
+
+  </script>
+
+</body>
+</html>
