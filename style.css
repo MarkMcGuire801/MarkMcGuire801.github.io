@@ -911,14 +911,14 @@ footer {
 
 
 /* ════════════════════════════════
-   CREDENTIALS PAGE
+   CERTIFICATIONS PAGE
    Certifications grouped by issuer —
    each group has a header with a
    verify link and a grid of cert cards
 ════════════════════════════════ */
 
 /* Outer wrapper for all issuer groups */
-.credentials-section {
+.certifications-section {
   display: flex;
   flex-direction: column;
   gap: 3rem;                            /* breathing room between issuer groups */
@@ -1112,6 +1112,166 @@ footer {
   margin: 0;
   font-style: italic;
 }
+
+/* ════════════════════════════════
+   EDUCATION PAGE
+   Tabbed layout with one panel per
+   degree — courses shown in a list
+   with cert alignments noted and a
+   collapsible overflow for long lists
+════════════════════════════════ */
+
+/* Individual degree card — wraps all
+   content for one degree */
+.education-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Degree header block — title row,
+   institution, and dates */
+.education-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+/* Row containing degree title and status tag */
+.education-title-row {
+  display: flex;
+  justify-content: space-between;   /* title left, status tag right */
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Degree name */
+.education-degree {
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+/* Institution name line */
+.education-institution {
+  font-size: 0.9rem;
+  color: var(--green);              /* green to match theme accents */
+}
+
+/* Conferred or expected date line */
+.education-dates {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Note block — used for in progress
+   programs to explain status */
+.education-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green-dim); /* left accent to draw attention */
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+  line-height: 1.6;
+}
+
+/* Achievements block — used for
+   honors and awards */
+.education-achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Achievement list — icons and text */
+.achievement-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+/* Each achievement item */
+.achievement-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+}
+
+/* Achievement icon — gold for trophy,
+   green for academic awards */
+.achievement-list .fa-trophy {
+  color: #f0a500;                   /* amber — matches in-progress tag color */
+}
+
+.achievement-list .fa-award {
+  color: var(--green);
+}
+
+/* Coursework section heading */
+.education-courses-title {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;           /* spaced out for label style */
+  margin-bottom: 0.5rem;
+}
+
+/* Course list — no bullet points,
+   each item is a row */
+.course-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Each course row — name left,
+   cert alignment right */
+.course-list li {
+  display: flex;
+  justify-content: space-between;   /* course name left, cert tag right */
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border); /* separator between courses */
+  font-size: 0.9rem;
+}
+
+/* Course name */
+.course-name {
+  color: var(--text);
+}
+
+/* Cert alignment tag — green pill */
+.course-cert {
+  font-size: 0.75rem;
+  color: var(--green);
+  border: 1px solid var(--green);
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;              /* prevents tag from wrapping */
+}
+
+/* Exemption tag — muted style since
+   it indicates a waived requirement */
+.course-exemption {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+}
+
 /* ════════════════════════════════
    MOBILE RESPONSIVE
    Styles that apply on screens
