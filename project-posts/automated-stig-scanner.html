@@ -122,7 +122,7 @@
         Handles all outputs and gathers some additional information for them such as IP and MAC addresses.
       </p>
 
-      <h2>Layer 2 — The Handlers (handlers\)</h2>
+      <h2>Layer 3 — The Handlers (handlers\)</h2>
       <p>
         These are reusable functions that know how to perform a specific type of system query.
         The registry handler knows how to read a Windows registry key and compare its value.
@@ -132,7 +132,7 @@
         checks that may need them.
       </p>
 
-      <h2>Layer 3 — The Checks (checks\)</h2>
+      <h2>Layer 4 — The Checks (checks\)</h2>
       <p>
         These files contain the actual STIG control definitions. Each definition is a block of
         data describing one control: the Vuln ID, Rule ID, Severity, Title, which handler type
@@ -260,8 +260,8 @@
 
     <!-- AI disclaimer note -->
     <div class="education-note" style="margin-bottom: 1.5rem;">
-      <i class="fa fa-circle-info"></i> Developed with AI-assisted coding (Claude). All security logic,
-      STIG control mappings, architectural decisions, and testing were performed and validated by me.
+      <i class="fa fa-circle-info"></i> Developed with AI-assisted coding (Claude). All logic,
+      STIG control mappings, architectural decisions, and testing were performed and validated by me with extreme focus on security and system stability.
     </div>
 
     <div class="tab-bar">
@@ -298,6 +298,22 @@
       <pre class="script-viewer" id="script-wmi">Loading...</pre>
     </div>
 
+    <!-- ═══════════════════════════════
+         LIGHTBOX OVERLAY
+         Hidden by default — clicking
+         any output image opens it here
+         fullscreen
+    ═══════════════════════════════ -->
+    <div class="lightbox" id="lightbox">
+      <!-- Close button — top right corner -->
+      <button class="lightbox-close" onclick="closeLightbox()">
+        <i class="fa fa-times"></i>
+      </button>
+      <!-- Expanded image — src updated by JavaScript -->
+      <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+      <!-- Caption below the expanded image -->
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
 
     <!-- Back to projects link -->
     <a href="../projects.html" class="read-more-btn" style="margin-top: 2rem; display: inline-block;">
@@ -332,6 +348,8 @@
        3. PowerShell script tabs
        Also fetches script file content
        from assets/scripts/ on page load
+       and hooks output images into
+       the lightbox for fullscreen view
   ═══════════════════════════════ -->
   <script>
 
@@ -415,6 +433,27 @@
         const name = scriptMap[btn.textContent.trim()];
         if (name) loadScript(name);
       });
+    });
+
+    /* Hook output images into the lightbox —
+       clicking any output image opens it fullscreen */
+    document.querySelectorAll('.output-img').forEach((img) => {
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox-img').alt = img.alt;
+        document.getElementById('lightbox-caption').textContent = img.alt;
+        document.getElementById('lightbox').classList.add('active');
+      });
+    });
+
+    /* Closes the lightbox by removing the active class */
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    /* Close lightbox when clicking outside the image */
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
     });
 
   </script>
