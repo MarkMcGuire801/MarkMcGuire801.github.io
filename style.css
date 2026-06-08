@@ -1273,6 +1273,45 @@ footer {
 }
 
 /* ════════════════════════════════
+   PROJECT OUTPUT SECTION
+   Full width image display for
+   output screenshots and a scrollable
+   code viewer for script files
+════════════════════════════════ */
+
+/* Wrapper for output screenshot images —
+   centers and constrains the image */
+.output-image-wrap {
+  margin-top: 1rem;
+}
+
+/* Output screenshot — full width with border */
+.output-img {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;                  /* clicking opens lightbox */
+}
+
+/* Scrollable code viewer for PowerShell scripts —
+   fixed height with horizontal and vertical scroll */
+.script-viewer {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text);
+  overflow-x: auto;                 /* horizontal scroll for long lines */
+  overflow-y: auto;                 /* vertical scroll for long files */
+  height: 500px;                    /* fixed height creates the scrollable window */
+  margin-top: 1rem;
+  white-space: pre;                 /* preserves all whitespace and indentation */
+}
+
+/* ════════════════════════════════
    MOBILE RESPONSIVE
    Styles that apply on screens
    narrower than 768px — adjusts
