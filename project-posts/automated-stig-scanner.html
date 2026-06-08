@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding — ensures special characters display correctly -->
+  <meta charset="UTF-8" />
+  <!-- Responsive viewport — makes the page scale correctly on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page title — shows in the browser tab and search engine results -->
+  <title>Mark McGuire - Projects | Automated STIG Scanner Using PowerShell</title>
+  <!-- Font Awesome — loaded before style.css so our styles can override if needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Path goes up one level since this file lives in project-posts/ -->
+  <!-- Shared stylesheet — loads last so it takes priority over external libraries -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════
+       HEADER
+       All links and paths go up one
+       level with ../ since this file
+       lives inside the project-posts/ folder
+  ═══════════════════════════════ -->
+  <header>
+
+    <!-- Top row: site name left, contact info box flush to top right -->
+    <div class="header-top">
+
+      <!-- Site name — white text, large font -->
+      <div class="site-name">Mark McGuire</div>
+
+      <!-- Contact info box — sits flush to top right of header -->
+      <div class="contact-info">
+
+        <!-- Label above the contact details -->
+        <div class="contact-info-label">Contact Information</div>
+
+        <!-- Row 1: Phone and Email -->
+        <div class="contact-details">
+          <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+        </div>
+
+        <!-- Row 2: LinkedIn, GitHub, and Location -->
+        <div class="contact-details">
+          <a href="https://www.linkedin.com/in/marktdem/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <span class="contact-divider">|</span>
+          <a href="https://github.com/MarkMcGuire801" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-location-dot"></i> Tucson, AZ</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation bar — Projects is marked active since all project posts live here
+         links go up one level with ../ -->
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../projects.html" class="active">Projects</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../education.html">Education</a>
+      <a href="../credentials.html">Certifications</a>
+      <a href="../references.html">References</a>
+    </nav>
+
+  </header>
+
+  <!-- ═══════════════════════════════
+       MAIN CONTENT
+       All page-specific content sits
+       inside this block
+  ═══════════════════════════════ -->
+  <main>
+
+    <!-- ═══════════════════════════════
+         PROJECT HEADER
+         Title, status tag, category,
+         and date
+    ═══════════════════════════════ -->
+    <div class="post-header">
+      <div class="project-card-header">
+        <h1 class="post-title">Automated STIG Scanner Using PowerShell</h1>
+        <div class="project-tags">
+          <!-- Status tag -->
+          <span class="status-tag complete">Complete</span>
+          <!-- Category tag -->
+          <span class="project-category">GRC | Automation | PowerShell</span>
+        </div>
+      </div>
+      <p class="blog-date"><i class="fa fa-calendar"></i> 2026</p>
+    </div>
+
+    <!-- ═══════════════════════════════
+         PROJECT CONTENT
+         Written overview and structure
+         explanation
+    ═══════════════════════════════ -->
+    <div class="post-content">
+
+      <p>
+        Normally the functions of this project would be executed through something like the
+        SCAP Compliance Checker (SCC) Tool or Tenable Nessus. This is a lightweight project
+        meant to serve as a general demonstration of practice with GRC concepts, STIGs, and PowerShell.
+      </p>
+
+      <h2>Project Structure</h2>
+      <p>
+        This project is split into a few different functions that all live within a single root
+        folder, with four distinct function layers.
+      </p>
+
+      <h2>Layer 1 — The Runner (runner.ps1)</h2>
+      <p>
+        This is the only file that is ever called directly. Its purpose is to orchestrate the
+        functions of all other files.
+      </p>
+
+      <h2>Layer 2 — The Reporter (report.ps1)</h2>
+      <p>
+        Handles all outputs and gathers some additional information for them such as IP and MAC addresses.
+      </p>
+
+      <h2>Layer 2 — The Handlers (handlers\)</h2>
+      <p>
+        These are reusable functions that know how to perform a specific type of system query.
+        The registry handler knows how to read a Windows registry key and compare its value.
+        The WMI handler knows how to query Windows system information classes. These tools are
+        blind to specific STIG controls, but many controls use the same underlying check types
+        and logic. They exist to be written once so they can be functional across many different
+        checks that may need them.
+      </p>
+
+      <h2>Layer 3 — The Checks (checks\)</h2>
+      <p>
+        These files contain the actual STIG control definitions. Each definition is a block of
+        data describing one control: the Vuln ID, Rule ID, Severity, Title, which handler type
+        to use, and the parameters to pass. The check definition does not perform any queries
+        itself — it is purely prescriptive. It describes what needs to be checked and with what
+        methods, and the runner and handlers do the actual work.
+      </p>
+
+      <h2>Workflow</h2>
+      <p>Run the following in an Admin PowerShell session:</p>
+      <pre>PowerShell -ExecutionPolicy Bypass -File .\runner.ps1</pre>
+      <p>The runner then executes the following steps:</p>
+      <ul>
+        <li>Finds and loads all .ps1 files in handlers\</li>
+        <li>Finds and loads all .ps1 files in checks\</li>
+        <li>Collects all *Checks variables into one $allChecks list</li>
+        <li>Loops over every control in $allChecks — for each control it reads the HandlerType, calls the right handler with CheckParams or runs CheckScript, and collects the result as Status and Detail</li>
+        <li>Prints color-coded results to the console</li>
+        <li>Prints a summary to the console</li>
+        <li>Calls report.ps1 to gather necessary information and generate an output report</li>
+        <li>Produces a checklist that can be opened with STIG Viewer</li>
+      </ul>
+
+      <h2>Current Rules Covered</h2>
+      <ul>
+        <li><strong>V-253255</strong> — Windows 11 domain-joined systems must have a TPM enabled and ready for use</li>
+        <li><strong>V-253284</strong> — Windows 11 must have an antivirus program installed and enabled (currently checks for Microsoft Defender AV)</li>
+        <li><strong>V-253270</strong> — Windows 11 must employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs</li>
+        <li><strong>V-253266</strong> — Windows 11 systems must be maintained at a supported servicing level</li>
+        <li><strong>V-253263</strong> — Windows 11 systems must use a BitLocker PIN with a minimum length of six digits for pre-boot authentication</li>
+        <li><strong>V-253262</strong> — Windows 11 systems must use a BitLocker PIN for pre-boot authentication</li>
+        <li><strong>V-253261</strong> — Windows 11 systems must use BitLocker to encrypt all fixed disks</li>
+        <li><strong>V-253257</strong> — Windows 11 systems must have SecureBoot enabled</li>
+        <li><strong>V-253256</strong> — Windows 11 systems must use UEFI firmware and be configured to run in UEFI mode, not legacy BIOS</li>
+        <li><strong>V-253254</strong> — Domain-joined systems must use Windows 11 Enterprise Edition 64-bit version</li>
+      </ul>
+
+    </div>
+
+
+    <!-- ═══════════════════════════════
+         OUTPUT TABS
+         Three tabs showing PowerShell
+         console output, STIG Viewer
+         checklist output, and
+         categorization by CAT level
+    ═══════════════════════════════ -->
+    <h2 class="section-title" style="margin-top: 2rem;">Output</h2>
+
+    <div class="tab-bar">
+      <!-- Active by default — PowerShell output loads first -->
+      <button class="tab-btn active" onclick="switchTab('ps-output', event)">
+        <i class="fa fa-terminal"></i> PowerShell Output
+      </button>
+      <button class="tab-btn" onclick="switchTab('stig-viewer', event)">
+        <i class="fa fa-list-check"></i> STIG Viewer Output
+      </button>
+      <button class="tab-btn" onclick="switchTab('categorization', event)">
+        <i class="fa fa-layer-group"></i> Categorization
+      </button>
+    </div>
+
+    <!-- PowerShell console output screenshot -->
+    <div class="tab-panel" id="tab-ps-output">
+      <div class="output-image-wrap">
+        <img src="../assets/images/STIG-PS-OUTPUT.png" alt="PowerShell console output showing STIG scan results" class="output-img grid-img" />
+      </div>
+    </div>
+
+    <!-- STIG Viewer checklist output screenshot -->
+    <div class="tab-panel hidden" id="tab-stig-viewer">
+      <div class="output-image-wrap">
+        <img src="../assets/images/STIGVIEWER-CHECKLIST.png" alt="STIG Viewer checklist output" class="output-img grid-img" />
+      </div>
+    </div>
+
+    <!-- Categorization tabs — CAT1, CAT2, CAT3 as nested tabs -->
+    <div class="tab-panel hidden" id="tab-categorization">
+
+      <!-- Nested tab bar for CAT levels -->
+      <div class="tab-bar" style="margin-top: 1rem;">
+        <button class="tab-btn cat-btn active" onclick="switchCatTab('cat1', event)">
+          CAT 1
+        </button>
+        <button class="tab-btn cat-btn" onclick="switchCatTab('cat2', event)">
+          CAT 2
+        </button>
+        <button class="tab-btn cat-btn" onclick="switchCatTab('cat3', event)">
+          CAT 3
+        </button>
+      </div>
+
+      <!-- CAT 1 screenshot -->
+      <div class="cat-panel" id="cat-panel-cat1">
+        <div class="output-image-wrap">
+          <img src="../assets/images/STIG-CAT1.png" alt="CAT 1 STIG findings" class="output-img grid-img" />
+        </div>
+      </div>
+
+      <!-- CAT 2 screenshot — hidden by default -->
+      <div class="cat-panel hidden" id="cat-panel-cat2">
+        <div class="output-image-wrap">
+          <img src="../assets/images/STIG-CAT2.png" alt="CAT 2 STIG findings" class="output-img grid-img" />
+        </div>
+      </div>
+
+      <!-- CAT 3 screenshot — hidden by default -->
+      <div class="cat-panel hidden" id="cat-panel-cat3">
+        <div class="output-image-wrap">
+          <img src="../assets/images/STIG-CAT3.png" alt="CAT 3 STIG findings" class="output-img grid-img" />
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ═══════════════════════════════
+         POWERSHELL SCRIPTS
+         Scrollable code windows for
+         each script file — loaded from
+         assets/scripts/ via JavaScript
+         fetch on page load
+    ═══════════════════════════════ -->
+    <h2 class="section-title" style="margin-top: 2rem;">PowerShell</h2>
+
+    <!-- AI disclaimer note -->
+    <div class="education-note" style="margin-bottom: 1.5rem;">
+      <i class="fa fa-circle-info"></i> Developed with AI-assisted coding (Claude). All security logic,
+      STIG control mappings, architectural decisions, and testing were performed and validated by me.
+    </div>
+
+    <div class="tab-bar">
+      <!-- Active by default — runner loads first -->
+      <button class="tab-btn active" onclick="switchScriptTab('runner', event)">runner.ps1</button>
+      <button class="tab-btn" onclick="switchScriptTab('report', event)">report.ps1</button>
+      <button class="tab-btn" onclick="switchScriptTab('hardware', event)">hardware_and_os_checks.ps1</button>
+      <button class="tab-btn" onclick="switchScriptTab('registry', event)">Invoke-RegistryCheck</button>
+      <button class="tab-btn" onclick="switchScriptTab('wmi', event)">Invoke-WmiCheck</button>
+    </div>
+
+    <!-- Runner script panel — active by default -->
+    <div class="tab-panel" id="tab-runner">
+      <pre class="script-viewer" id="script-runner">Loading...</pre>
+    </div>
+
+    <!-- Report script panel -->
+    <div class="tab-panel hidden" id="tab-report">
+      <pre class="script-viewer" id="script-report">Loading...</pre>
+    </div>
+
+    <!-- Hardware and OS checks script panel -->
+    <div class="tab-panel hidden" id="tab-hardware">
+      <pre class="script-viewer" id="script-hardware">Loading...</pre>
+    </div>
+
+    <!-- Registry handler script panel -->
+    <div class="tab-panel hidden" id="tab-registry">
+      <pre class="script-viewer" id="script-registry">Loading...</pre>
+    </div>
+
+    <!-- WMI handler script panel -->
+    <div class="tab-panel hidden" id="tab-wmi">
+      <pre class="script-viewer" id="script-wmi">Loading...</pre>
+    </div>
+
+
+    <!-- Back to projects link -->
+    <a href="../projects.html" class="read-more-btn" style="margin-top: 2rem; display: inline-block;">
+      <i class="fa fa-arrow-left"></i> Back to Projects
+    </a>
+
+  </main>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+       Displays contact info and
+       copyright at the bottom of
+       every page
+  ═══════════════════════════════ -->
+  <footer>
+    <div class="footer-contact">
+      <!-- Quick contact info repeated from header for easy access -->
+      <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+      <span class="contact-divider">|</span>
+      <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+    </div>
+    <!-- Copyright line -->
+    <p>&copy; 2026 Mark McGuire</p>
+  </footer>
+
+  <!-- ═══════════════════════════════
+       JAVASCRIPT
+       Handles three sets of tabs:
+       1. Output tabs (PS output, STIG
+          Viewer, Categorization)
+       2. Nested CAT level tabs
+       3. PowerShell script tabs
+       Also fetches script file content
+       from assets/scripts/ on page load
+  ═══════════════════════════════ -->
+  <script>
+
+    /* switchTab(tab, event)
+       tab: string — "ps-output", "stig-viewer", or "categorization"
+       event: the click event from the button
+       Switches the output section tabs */
+    function switchTab(tab, event) {
+      document.querySelectorAll('.tab-bar:first-of-type .tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('#tab-ps-output, #tab-stig-viewer, #tab-categorization').forEach(panel => panel.classList.add('hidden'));
+      document.getElementById('tab-' + tab).classList.remove('hidden');
+      event.target.closest('.tab-btn').classList.add('active');
+    }
+
+    /* switchCatTab(cat, event)
+       cat: string — "cat1", "cat2", or "cat3"
+       event: the click event from the button
+       Switches the nested CAT level tabs */
+    function switchCatTab(cat, event) {
+      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.cat-panel').forEach(panel => panel.classList.add('hidden'));
+      document.getElementById('cat-panel-' + cat).classList.remove('hidden');
+      event.target.closest('.tab-btn').classList.add('active');
+    }
+
+    /* switchScriptTab(script, event)
+       script: string — "runner", "report", "hardware", "registry", or "wmi"
+       event: the click event from the button
+       Switches the PowerShell script viewer tabs */
+    function switchScriptTab(script, event) {
+      document.querySelectorAll('.tab-bar:last-of-type .tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('#tab-runner, #tab-report, #tab-hardware, #tab-registry, #tab-wmi').forEach(panel => panel.classList.add('hidden'));
+      document.getElementById('tab-' + script).classList.remove('hidden');
+      event.target.closest('.tab-btn').classList.add('active');
+    }
+
+    /* Script file map — maps tab names to their file paths in assets/scripts/
+       Update filenames here if they change */
+    const scriptFiles = {
+      runner:   '../assets/scripts/runner.ps1',
+      report:   '../assets/scripts/report.ps1',
+      hardware: '../assets/scripts/hardware_and_os_checks.ps1',
+      registry: '../assets/scripts/Invoke-RegistryCheck.ps1',
+      wmi:      '../assets/scripts/Invoke-WmiCheck.ps1'
+    };
+
+    /* Fetches a script file and populates its pre element —
+       called on page load for the default tab and on first
+       click for all others to avoid unnecessary requests */
+    const loadedScripts = {};
+
+    function loadScript(name) {
+      if (loadedScripts[name]) return;
+      loadedScripts[name] = true;
+      fetch(scriptFiles[name])
+        .then(res => {
+          if (!res.ok) throw new Error('File not found');
+          return res.text();
+        })
+        .then(text => {
+          document.getElementById('script-' + name).textContent = text;
+        })
+        .catch(() => {
+          document.getElementById('script-' + name).textContent = 'Could not load ' + scriptFiles[name];
+        });
+    }
+
+    /* Load the default script on page load */
+    loadScript('runner');
+
+    /* Load each script on first tab click */
+    document.querySelectorAll('.tab-bar .tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const scriptMap = {
+          'runner.ps1': 'runner',
+          'report.ps1': 'report',
+          'hardware_and_os_checks.ps1': 'hardware',
+          'Invoke-RegistryCheck': 'registry',
+          'Invoke-WmiCheck': 'wmi'
+        };
+        const name = scriptMap[btn.textContent.trim()];
+        if (name) loadScript(name);
+      });
+    });
+
+  </script>
+
+</body>
+</html>
