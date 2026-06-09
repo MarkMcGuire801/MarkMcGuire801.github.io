@@ -182,7 +182,7 @@
     ═══════════════════════════════ -->
     <h2 class="section-title" style="margin-top: 2rem;">Output</h2>
 
-    <div class="tab-bar">
+    <div class="tab-bar output-tab-bar">
       <!-- Active by default — PowerShell output loads first -->
       <button class="tab-btn active" onclick="switchTab('ps-output', event)">
         <i class="fa fa-terminal"></i> PowerShell Output
@@ -213,7 +213,7 @@
     <div class="tab-panel hidden" id="tab-categorization">
 
       <!-- Nested tab bar for CAT levels -->
-      <div class="tab-bar" style="margin-top: 1rem;">
+      <div class="tab-bar cat-tab-bar" style="margin-top: 1rem;">
         <button class="tab-btn cat-btn active" onclick="switchCatTab('cat1', event)">
           CAT 1
         </button>
@@ -256,111 +256,71 @@
          assets/scripts/ via JavaScript
          fetch on page load
     ═══════════════════════════════ -->
-    /* switchTab(tab, event)
-   tab: string — "ps-output", "stig-viewer", or "categorization"
-   event: the click event from the button
-   Switches the output section tabs */
-function switchTab(tab, event) {
-  const bar = event.target.closest('.tab-bar');
-  bar.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('#tab-ps-output, #tab-stig-viewer, #tab-categorization').forEach(panel => panel.classList.add('hidden'));
-  document.getElementById('tab-' + tab).classList.remove('hidden');
-  event.target.closest('.tab-btn').classList.add('active');
-}
+    <h2 class="section-title" style="margin-top: 2rem;">PowerShell</h2>
 
-/* switchCatTab(cat, event)
-   cat: string — "cat1", "cat2", or "cat3"
-   event: the click event from the button
-   Switches the nested CAT level tabs */
-function switchCatTab(cat, event) {
-  const bar = event.target.closest('.tab-bar');
-  bar.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('.cat-panel').forEach(panel => panel.classList.add('hidden'));
-  document.getElementById('cat-panel-' + cat).classList.remove('hidden');
-  event.target.closest('.tab-btn').classList.add('active');
-}
+    <!-- AI disclaimer note -->
+    <div class="education-note" style="margin-bottom: 1.5rem;">
+      <i class="fa fa-circle-info"></i> Developed with AI-assisted coding (Claude). All logic,
+      STIG control mappings, architectural decisions, and testing were performed and validated by me with extreme focus on security and system stability.
+    </div>
 
-/* switchScriptTab(script, event)
-   script: string — "runner", "report", "hardware", "registry", or "wmi"
-   event: the click event from the button
-   Switches the PowerShell script viewer tabs */
-function switchScriptTab(script, event) {
-  const bar = event.target.closest('.tab-bar');
-  bar.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  document.querySelectorAll('#tab-runner, #tab-report, #tab-hardware, #tab-registry, #tab-wmi').forEach(panel => panel.classList.add('hidden'));
-  document.getElementById('tab-' + script).classList.remove('hidden');
-  event.target.closest('.tab-btn').classList.add('active');
-}
+    <div class="tab-bar script-tab-bar">
+      <!-- Active by default — runner loads first -->
+      <button class="tab-btn active" onclick="switchScriptTab('runner', event)">runner.ps1</button>
+      <button class="tab-btn" onclick="switchScriptTab('report', event)">report.ps1</button>
+      <button class="tab-btn" onclick="switchScriptTab('hardware', event)">hardware_and_os_checks.ps1</button>
+      <button class="tab-btn" onclick="switchScriptTab('registry', event)">Invoke-RegistryCheck</button>
+      <button class="tab-btn" onclick="switchScriptTab('wmi', event)">Invoke-WmiCheck</button>
+    </div>
 
-/* Script file map — maps tab names to their file paths in assets/scripts/
-   Update filenames here if they change */
-const scriptFiles = {
-  runner:   '../assets/scripts/runner.ps1',
-  report:   '../assets/scripts/report.ps1',
-  hardware: '../assets/scripts/hardware_and_os_checks.ps1',
-  registry: '../assets/scripts/Invoke-RegistryCheck.ps1',
-  wmi:      '../assets/scripts/Invoke-WmiCheck.ps1'
-};
+    <!-- Runner script panel — active by default -->
+    <div class="tab-panel" id="tab-runner">
+      <pre class="script-viewer" id="script-runner">Loading...</pre>
+    </div>
 
-/* Fetches a script file and populates its pre element —
-   called on page load for the default tab and on first
-   click for all others to avoid unnecessary requests */
-const loadedScripts = {};
+    <!-- Report script panel -->
+    <div class="tab-panel hidden" id="tab-report">
+      <pre class="script-viewer" id="script-report">Loading...</pre>
+    </div>
 
-function loadScript(name) {
-  if (loadedScripts[name]) return;
-  loadedScripts[name] = true;
-  fetch(scriptFiles[name])
-    .then(res => {
-      if (!res.ok) throw new Error('File not found');
-      return res.text();
-    })
-    .then(text => {
-      document.getElementById('script-' + name).textContent = text;
-    })
-    .catch(() => {
-      document.getElementById('script-' + name).textContent = 'Could not load ' + scriptFiles[name];
-    });
-}
+    <!-- Hardware and OS checks script panel -->
+    <div class="tab-panel hidden" id="tab-hardware">
+      <pre class="script-viewer" id="script-hardware">Loading...</pre>
+    </div>
 
-/* Load the default script on page load */
-loadScript('runner');
+    <!-- Registry handler script panel -->
+    <div class="tab-panel hidden" id="tab-registry">
+      <pre class="script-viewer" id="script-registry">Loading...</pre>
+    </div>
 
-/* Load each script on first tab click */
-document.querySelectorAll('.tab-bar .tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const scriptMap = {
-      'runner.ps1': 'runner',
-      'report.ps1': 'report',
-      'hardware_and_os_checks.ps1': 'hardware',
-      'Invoke-RegistryCheck': 'registry',
-      'Invoke-WmiCheck': 'wmi'
-    };
-    const name = scriptMap[btn.textContent.trim()];
-    if (name) loadScript(name);
-  });
-});
+    <!-- WMI handler script panel -->
+    <div class="tab-panel hidden" id="tab-wmi">
+      <pre class="script-viewer" id="script-wmi">Loading...</pre>
+    </div>
 
-/* Hook output images into the lightbox —
-   clicking any output image opens it fullscreen */
-document.querySelectorAll('.output-img').forEach((img) => {
-  img.addEventListener('click', () => {
-    document.getElementById('lightbox-img').src = img.src;
-    document.getElementById('lightbox-img').alt = img.alt;
-    document.getElementById('lightbox-caption').textContent = img.alt;
-    document.getElementById('lightbox').classList.add('active');
-  });
-});
+    <!-- ═══════════════════════════════
+         LIGHTBOX OVERLAY
+         Hidden by default — clicking
+         any output image opens it here
+         fullscreen
+    ═══════════════════════════════ -->
+    <div class="lightbox" id="lightbox">
+      <!-- Close button — top right corner -->
+      <button class="lightbox-close" onclick="closeLightbox()">
+        <i class="fa fa-times"></i>
+      </button>
+      <!-- Expanded image — src updated by JavaScript -->
+      <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+      <!-- Caption below the expanded image -->
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
 
-/* Closes the lightbox by removing the active class */
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-}
+    <!-- Back to projects link -->
+    <a href="../projects.html" class="read-more-btn" style="margin-top: 2rem; display: inline-block;">
+      <i class="fa fa-arrow-left"></i> Back to Projects
+    </a>
 
-/* Close lightbox when clicking outside the image */
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLightbox();
-});
+  </main>
 
   <!-- ═══════════════════════════════
        FOOTER
@@ -396,9 +356,11 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     /* switchTab(tab, event)
        tab: string — "ps-output", "stig-viewer", or "categorization"
        event: the click event from the button
-       Switches the output section tabs */
+       Scopes deactivation to the output tab bar only
+       so other tab bars are unaffected */
     function switchTab(tab, event) {
-      document.querySelectorAll('.tab-bar:first-of-type .tab-btn').forEach(btn => btn.classList.remove('active'));
+      const bar = event.target.closest('.tab-bar');
+      bar.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('#tab-ps-output, #tab-stig-viewer, #tab-categorization').forEach(panel => panel.classList.add('hidden'));
       document.getElementById('tab-' + tab).classList.remove('hidden');
       event.target.closest('.tab-btn').classList.add('active');
@@ -407,9 +369,10 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     /* switchCatTab(cat, event)
        cat: string — "cat1", "cat2", or "cat3"
        event: the click event from the button
-       Switches the nested CAT level tabs */
+       Scopes deactivation to the CAT tab bar only */
     function switchCatTab(cat, event) {
-      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      const bar = event.target.closest('.tab-bar');
+      bar.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.cat-panel').forEach(panel => panel.classList.add('hidden'));
       document.getElementById('cat-panel-' + cat).classList.remove('hidden');
       event.target.closest('.tab-btn').classList.add('active');
@@ -418,9 +381,10 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     /* switchScriptTab(script, event)
        script: string — "runner", "report", "hardware", "registry", or "wmi"
        event: the click event from the button
-       Switches the PowerShell script viewer tabs */
+       Scopes deactivation to the script tab bar only */
     function switchScriptTab(script, event) {
-      document.querySelectorAll('.tab-bar:last-of-type .tab-btn').forEach(btn => btn.classList.remove('active'));
+      const bar = event.target.closest('.tab-bar');
+      bar.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('#tab-runner, #tab-report, #tab-hardware, #tab-registry, #tab-wmi').forEach(panel => panel.classList.add('hidden'));
       document.getElementById('tab-' + script).classList.remove('hidden');
       event.target.closest('.tab-btn').classList.add('active');
@@ -497,6 +461,9 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
     });
 
   </script>
+
+</body>
+</html>
 
 </body>
 </html>
