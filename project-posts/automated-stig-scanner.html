@@ -141,20 +141,23 @@
         methods, and the runner and handlers do the actual work.
       </p>
 
+      
       <h2>Workflow</h2>
-      <p>Run the following in an Admin PowerShell session:</p>
-      <pre>PowerShell -ExecutionPolicy Bypass -File .\runner.ps1</pre>
-      <p>The runner then executes the following steps:</p>
-      <ul>
-        <li>Finds and loads all .ps1 files in handlers\</li>
-        <li>Finds and loads all .ps1 files in checks\</li>
-        <li>Collects all *Checks variables into one $allChecks list</li>
-        <li>Loops over every control in $allChecks — for each control it reads the HandlerType, calls the right handler with CheckParams or runs CheckScript, and collects the result as Status and Detail</li>
-        <li>Prints color-coded results to the console</li>
-        <li>Prints a summary to the console</li>
-        <li>Calls report.ps1 to gather necessary information and generate an output report</li>
-        <li>Produces a checklist that can be opened with STIG Viewer</li>
-      </ul>
+        <p>Run the following in an Admin PowerShell session:</p>
+        <pre>PowerShell -ExecutionPolicy Bypass -File .\runner.ps1</pre>
+        <p>runner.ps1 then executes the following steps:</p>
+        <pre>
+    Step 1 -> Dot sources report.ps1
+              Get-NetworkInfo, Export-CsvReport, Export-CklbReport now available
+    Step 2 -> Dot sources all files in handlers\
+              Invoke-RegistryCheck and Invoke-WmiCheck now available
+    Step 3 -> Dot sources all files in checks\
+              $HardwareAndOsChecks (10 controls) now available
+    Step 4 -> Collects all *Checks variables into $allChecks
+    Step 5 -> Loops over every control, runs it, collects results
+    Step 6 -> Prints summary to console
+    Step 7 -> Calls Export-CsvReport -> saves .csv to output\
+              Calls Export-CklbReport -> collects IP/MAC, saves .cklb to output\</pre>
 
       <h2>Current Rules Covered</h2>
       <ul>
