@@ -568,6 +568,24 @@ footer {
   border-bottom: 1px solid var(--border);
 }
 
+/* ── Big number scrollable box ──
+   Constrains very long text content
+   to a fixed height scrollable area */
+.blog-bignum {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-family: Georgia, serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-height: 200px;                /* fixed height creates the scroll */
+  overflow-y: auto;                 /* vertical scroll for long content */
+}
+
 /* Large post title at the top of the post page */
 .post-title {
   font-size: 1.8rem;
