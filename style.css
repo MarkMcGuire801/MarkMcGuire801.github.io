@@ -1310,7 +1310,201 @@ footer {
   margin-top: 1rem;
   white-space: pre;                 /* preserves all whitespace and indentation */
 }
+/* ════════════════════════════════
+   BLOG POST CONTENT
+   Styles for markdown-rendered blog
+   posts — Georgia serif font for
+   readability, terminal green accents,
+   and visual distinction for code,
+   math, and callout elements
+════════════════════════════════ */
 
+/* Constrains blog post content to a
+   comfortable reading width */
+.blog-post-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Base prose styles for markdown
+   rendered content */
+.blog-post-wrap .post-content {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+/* Paragraph spacing */
+.blog-post-wrap .post-content p {
+  margin-bottom: 1.4rem;
+}
+
+/* ── Headings ──
+   All caps with wide letter spacing
+   and terminal green color */
+.blog-post-wrap .post-content h1,
+.blog-post-wrap .post-content h2,
+.blog-post-wrap .post-content h3 {
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--green);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.blog-post-wrap .post-content h1 {
+  font-size: 1.3rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.blog-post-wrap .post-content h2 {
+  font-size: 1.1rem;
+}
+
+.blog-post-wrap .post-content h3 {
+  font-size: 0.95rem;
+  color: var(--green-dim);
+}
+
+/* ── Bold text ──
+   Terminal green to make it stand out */
+.blog-post-wrap .post-content strong {
+  color: var(--green);
+  font-weight: bold;
+}
+
+/* ── Italic text ── */
+.blog-post-wrap .post-content em {
+  font-style: italic;
+  color: var(--text);
+}
+
+/* ── Inline code ──
+   Monospace with subtle background */
+.blog-post-wrap .post-content code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.88rem;
+  color: var(--green);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+}
+
+/* ── Code blocks ──
+   Full width shaded block with
+   green monospace text */
+.blog-post-wrap .post-content pre {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.blog-post-wrap .post-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--green);
+  line-height: 1.7;
+}
+
+/* ── Bullet lists ── */
+.blog-post-wrap .post-content ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.4rem;
+}
+
+.blog-post-wrap .post-content ul li {
+  margin-bottom: 0.4rem;
+  line-height: 1.8;
+}
+
+.blog-post-wrap .post-content ul li::marker {
+  color: var(--green);
+}
+
+/* ── Callout boxes ──
+   Left green border accent with
+   slightly lighter background —
+   used for key formulas and notes */
+.blog-callout {
+  background-color: var(--surface);
+  border-left: 3px solid var(--green);
+  border-radius: 0 4px 4px 0;
+  padding: 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ── Math formula blocks ──
+   Centered display for standalone
+   equations */
+.blog-math {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  color: var(--green);
+  letter-spacing: 0.05em;
+}
+
+/* ── References section ──
+   Numbered list of citations with
+   links styled to match the theme */
+.blog-references {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.blog-references h2 {
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--green);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.blog-references ol {
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog-references ol li {
+  font-family: Georgia, serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.blog-references a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.blog-references a:hover {
+  color: var(--green);
+}
 /* ════════════════════════════════
    MOBILE RESPONSIVE
    Styles that apply on screens
