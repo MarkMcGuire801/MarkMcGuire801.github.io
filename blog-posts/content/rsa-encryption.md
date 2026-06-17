@@ -370,8 +370,8 @@ Both keys share *n*, which acts as a constant for all calculations. *e* can encr
 
 ## Closing Thoughts
 
-I hope this has made the inner workings of RSA a bit more accessible. The concepts here can be quite a bit to digest — it personally took three days of learning about all of these concepts and writing this to feel like I actually had a grasp on what was going on.
+I hope this has made the inner workings of RSA a bit more accessible. The concepts here can be quite a bit to digest; it personally took three days of learning about all of these concepts and writing this to feel like I actually had a grasp on what was going on.
 
-This whole process left me with a much deeper appreciation for how certain aspects of cybersecurity actually work. The math is genuinely interesting, and there have been so many hands at work over hundreds of years to get to this point. Euler lived in the 1700s; Robert Carmichael defined his function in 1910; the father of number theory himself, Pierre de Fermat, lived in the 1600s; and then there are the geniuses who contributed to computing itself — Ada Lovelace, Alan Turing, and many others. Mountains of work, hundreds of years, these what-are-essentially-wizards spanning history, and we're left with wildly cool frameworks that keep billions of people on the internet safe and secure.
+This whole process left me with a much deeper appreciation for how certain aspects of cybersecurity actually work. The math is genuinely interesting, and there have been so many hands at work over hundreds of years to get to this point. Euler lived in the 1700s; Robert Carmichael defined his function in 1910; the father of number theory himself, Pierre de Fermat, lived in the 1600s; and then there are the geniuses who contributed to computing itself — Ada Lovelace, Alan Turing, and many others. Mountains of work, hundreds of years, these (what are essentially)wizards spanning history, and we're left with wildly cool frameworks that keep billions of people on the internet safe and secure.
 
 *If you made it this far, thank you for reading.*
