@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding — ensures special characters display correctly -->
+  <meta charset="UTF-8" />
+  <!-- Responsive viewport — makes the page scale correctly on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Page title — update for each post -->
+  <title>Mark McGuire - Blog | RSA Encryption</title>
+  <!-- Font Awesome — loaded before style.css so our styles can override if needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Shared stylesheet — loads last so it takes priority over external libraries -->
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════
+       HEADER
+       All links and paths go up one
+       level with ../ since this file
+       lives inside the blog-posts/ folder
+  ═══════════════════════════════ -->
+  <header>
+
+    <!-- Top row: site name left, contact info box flush to top right -->
+    <div class="header-top">
+
+      <!-- Site name — white text, large font -->
+      <div class="site-name">Mark McGuire</div>
+
+      <!-- Contact info box — sits flush to top right of header -->
+      <div class="contact-info">
+
+        <!-- Label above the contact details -->
+        <div class="contact-info-label">Contact Information</div>
+
+        <!-- Row 1: Phone and Email -->
+        <div class="contact-details">
+          <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+        </div>
+
+        <!-- Row 2: LinkedIn, GitHub, and Location -->
+        <div class="contact-details">
+          <a href="https://www.linkedin.com/in/marktdem/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <span class="contact-divider">|</span>
+          <a href="https://github.com/MarkMcGuire801" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          <span class="contact-divider">|</span>
+          <span><i class="fa fa-location-dot"></i> Tucson, AZ</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation bar — Blog is marked active since all posts live here
+         links go up one level with ../ -->
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../blog.html" class="active">Blog</a>
+      <a href="../education.html">Education</a>
+      <a href="../credentials.html">Certifications</a>
+      <a href="../references.html">References</a>
+    </nav>
+
+  </header>
+
+  <!-- ═══════════════════════════════
+       MAIN CONTENT
+       All page-specific content sits
+       inside this block
+  ═══════════════════════════════ -->
+  <main>
+
+    <!-- ═══════════════════════════════
+         POST HEADER
+         Title, category tag, and date
+    ═══════════════════════════════ -->
+    <div class="post-header">
+      <div class="blog-card-header">
+        <h1 class="post-title">RSA Encryption — A Plain Language Walkthrough</h1>
+        <span class="blog-category">Cybersecurity</span>
+      </div>
+      <p class="blog-date"><i class="fa fa-calendar"></i> June 17, 2026</p>
+    </div>
+
+    <!-- ═══════════════════════════════
+         POST CONTENT
+         Markdown file is fetched and
+         rendered here by Marked.js
+    ═══════════════════════════════ -->
+    <div class="blog-post-wrap">
+      <div id="post-content" class="post-content"></div>
+
+      <!-- ═══════════════════════════════
+           REFERENCES
+           Manually listed since markdown
+           doesn't have a citation format
+      ═══════════════════════════════ -->
+      <div class="blog-references">
+        <h2>References</h2>
+        <ol>
+          <li><a href="https://en.wikipedia.org/wiki/RSA_cryptosystem" target="_blank">Wikipedia — RSA Cryptosystem</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Public-key_cryptography" target="_blank">Wikipedia — Public-Key Cryptography</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Modular_arithmetic" target="_blank">Wikipedia — Modular Arithmetic</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Carmichael_function" target="_blank">Wikipedia — Carmichael Function</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Coprime_integers" target="_blank">Wikipedia — Coprime Integers</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Modular_multiplicative_inverse" target="_blank">Wikipedia — Modular Multiplicative Inverse</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm" target="_blank">Wikipedia — Extended Euclidean Algorithm</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity" target="_blank">Wikipedia — Bézout's Identity</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Euler%27s_totient_function" target="_blank">Wikipedia — Euler's Totient Function</a></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Back to blog link -->
+    <a href="../blog.html" class="read-more-btn" style="margin-top: 2rem; display: inline-block;">
+      <i class="fa fa-arrow-left"></i> Back to Blog
+    </a>
+
+  </main>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+       Displays contact info and
+       copyright at the bottom of
+       every page
+  ═══════════════════════════════ -->
+  <footer>
+    <div class="footer-contact">
+      <span><i class="fa fa-phone"></i> (520) 808-1479</span>
+      <span class="contact-divider">|</span>
+      <span><i class="fa fa-envelope"></i> MarkMcGuire8101@gmail.com</span>
+    </div>
+    <p>&copy; 2026 Mark McGuire</p>
+  </footer>
+
+  <!-- ═══════════════════════════════
+       JAVASCRIPT
+       Loads Marked.js from CDN and
+       fetches the markdown content
+       file, rendering it into the
+       post-content div
+  ═══════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <script>
+
+    /* Fetch the markdown file and render it as HTML —
+       Marked.js handles both standard markdown and
+       any inline HTML embedded in the .md file */
+    fetch('../blog-posts/content/rsa-encryption.md')
+      .then(res => {
+        if (!res.ok) throw new Error('File not found');
+        return res.text();
+      })
+      .then(text => {
+        document.getElementById('post-content').innerHTML = marked.parse(text);
+      })
+      .catch(() => {
+        document.getElementById('post-content').innerHTML = '<p>Content could not be loaded.</p>';
+      });
+
+  </script>
+
+</body>
+</html>
