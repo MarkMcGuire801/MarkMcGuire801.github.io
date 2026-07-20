@@ -331,7 +331,7 @@ This links directly to the trapdoor function. It's trivial to multiply two large
 Using Carmichael's totient function: since *n = pq* and both are prime, λ(p) = p − 1 and λ(q) = q − 1, so λ(n) = lcm(p − 1, q − 1).
 
 ```
-lcm(φ(7−1), φ(11−1)) = lcm(φ(6), φ(10)) = lcm(6, 10) = 30
+lcm((7−1), (11−1)) = lcm(6, 10) = 30
 ```
 
 <div class="blog-callout">
