@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import { education } from "../data/education";
+---
+
+<Base title="Education">
+  <section class="reveal is-visible mx-auto max-w-5xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <p class="ink-eyebrow" style="opacity:1;">Academic record</p>
+    <h1 class="text-4xl sm:text-5xl">Education</h1>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-5 pt-10 sm:px-8">
+    <div class="space-y-6">
+      {
+        education.map((deg) => (
+          <section class="reveal card p-6 sm:p-8">
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+              <div class="min-w-0">
+                <h2 class="text-xl leading-snug sm:text-2xl">{deg.degree}</h2>
+                <p class="mt-1.5" style="color: var(--text-muted);">{deg.school}</p>
+                <p class="mt-0.5 text-sm mono" style="color: var(--text-muted);">{deg.dates}</p>
+              </div>
+              <span
+                class="pill shrink-0"
+                style={deg.status === "Complete"
+                  ? "color: var(--slate); border-color: var(--slate);"
+                  : "color: var(--text-muted);"}
+              >
+                {deg.status}
+              </span>
+            </div>
+
+            {deg.note && (
+              <p class="mt-4 rounded-lg p-3 text-sm" style="background: var(--code-bg); color: var(--text-muted);">
+                {deg.note}
+              </p>
+            )}
+
+            {deg.achievements && (
+              <div class="mt-5">
+                <p class="mb-2 text-xs mono uppercase tracking-wider" style="color: var(--text-muted);">Achievements</p>
+                <ul class="space-y-1.5">
+                  {deg.achievements.map((a) => (
+                    <li class="flex items-start gap-2 text-sm">
+                      <span style="color: var(--slate);">▸</span>
+                      <span>{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div class="mt-5">
+              <p class="mb-2.5 text-xs mono uppercase tracking-wider" style="color: var(--text-muted);">Coursework</p>
+              <div class="flex flex-wrap gap-1.5">
+                {deg.coursework.map((c) => (
+                  <span
+                    class="group relative rounded-md px-2.5 py-1 text-[0.82rem]"
+                    style="background: var(--code-bg); color: var(--text);"
+                    title={c.aligned ? `Aligned with: ${c.aligned}` : undefined}
+                  >
+                    {c.name}
+                    {c.aligned && <span class="ml-1.5 text-[0.7rem]" style="color: var(--slate);">↔ {c.aligned}</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</Base>
