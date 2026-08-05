@@ -1,0 +1,44 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")).filter((p) => !p.data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.summary}>
+  <article class="mx-auto max-w-2xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <a href="/blog" class="mono text-xs" style="color: var(--text-muted);">← Back to blog</a>
+    <header class="mt-4 mb-8">
+      <div class="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs mono" style="color: var(--text-muted);">
+        <span>{post.data.dateLabel}</span>
+        {post.data.tags.map((t) => (<span style="color: var(--slate);">#{t}</span>))}
+      </div>
+      <h1 class="text-3xl leading-tight sm:text-4xl">{post.data.title}</h1>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      post.data.references.length > 0 && (
+        <section class="mt-14 border-t pt-6" style="border-color: var(--border);">
+          <p class="ink-eyebrow reveal is-visible" style="opacity:1;">References</p>
+          <ul class="space-y-1.5 text-sm">
+            {post.data.references.map((ref) => (
+              <li>
+                <a href={ref.url} target="_blank" rel="noopener" style="color: var(--accent);">{ref.label}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</Base>
