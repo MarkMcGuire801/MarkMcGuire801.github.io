@@ -1,0 +1,40 @@
+---
+import Base from "../layouts/Base.astro";
+import { references } from "../data/references";
+---
+
+<Base title="References">
+  <section class="reveal is-visible mx-auto max-w-5xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <p class="ink-eyebrow" style="opacity:1;">In their words</p>
+    <h1 class="text-4xl sm:text-5xl">References</h1>
+  </section>
+
+  <div class="mx-auto max-w-3xl px-5 pt-10 sm:px-8">
+    <div class="space-y-6">
+      {
+        references.map((ref) => (
+          <figure class="reveal card p-6 sm:p-8">
+            <figcaption class="mb-5 flex items-center gap-4 border-b pb-5" style="border-color: var(--border);">
+              <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sm font-medium"
+                style="background: var(--accent); color: var(--cream); font-family: var(--font-mono);"
+                aria-hidden="true"
+              >
+                {ref.initials}
+              </div>
+              <div>
+                <p class="text-base" style="font-family: var(--font-display); font-weight: 500;">{ref.name}</p>
+                <p class="text-sm" style="color: var(--text-muted);">
+                  {ref.title} · <span style="color: var(--slate);">{ref.relationship}</span>
+                </p>
+              </div>
+            </figcaption>
+            <blockquote class="space-y-4 text-[0.98rem] leading-relaxed">
+              {ref.quote.map((para) => (<p>{para}</p>))}
+            </blockquote>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</Base>
