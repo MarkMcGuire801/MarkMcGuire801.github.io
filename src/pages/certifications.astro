@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import { certifications } from "../data/certifications";
+
+const total = certifications.reduce((n, i) => n + i.certs.length, 0);
+---
+
+<Base title="Certifications">
+  <section class="reveal is-visible mx-auto max-w-5xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <p class="ink-eyebrow" style="opacity:1;">{total} active credentials</p>
+    <h1 class="text-4xl sm:text-5xl">Certifications</h1>
+  </section>
+
+  <div class="mx-auto max-w-5xl px-5 pt-10 sm:px-8">
+    <div class="space-y-10">
+      {
+        certifications.map((issuer) => (
+          <section class="reveal">
+            <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2 border-b pb-2" style="border-color: var(--border);">
+              <h2 class="text-xl" style="font-family: var(--font-display); font-weight: 500;">{issuer.issuer}</h2>
+              <a href={issuer.verifyUrl} target="_blank" rel="noopener" class="text-xs mono" style="color: var(--accent);">
+                Verify at {issuer.verify} ↗
+              </a>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              {issuer.certs.map((cert) => (
+                <div class="card p-5">
+                  <div class="flex items-start justify-between gap-3">
+                    <h3 class="text-base leading-snug" style="font-family: var(--font-display); font-weight: 500;">{cert.name}</h3>
+                    <span class="pill shrink-0" style="color: var(--slate); border-color: var(--slate);">{cert.status}</span>
+                  </div>
+                  <dl class="mt-4 grid grid-cols-2 gap-y-2 text-sm">
+                    <dt style="color: var(--text-muted);">Issued</dt>
+                    <dd class="text-right mono">{cert.issued}</dd>
+                    <dt style="color: var(--text-muted);">Expires</dt>
+                    <dd class="text-right mono">{cert.expires}</dd>
+                  </dl>
+                  <div class="mt-3 border-t pt-3" style="border-color: var(--border);">
+                    <p class="text-[0.7rem] mono uppercase tracking-wider" style="color: var(--text-muted);">Credential ID</p>
+                    <p class="mt-1 break-all text-xs mono" style="color: var(--text);">{cert.code}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</Base>
