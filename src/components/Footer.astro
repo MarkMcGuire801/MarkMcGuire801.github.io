@@ -1,0 +1,24 @@
+---
+import { site } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t" style="border-color: var(--border);">
+  <div class="mx-auto max-w-5xl px-5 py-10 sm:px-8">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-lg" style="font-family: var(--font-display); font-weight: 500;">{site.name}</p>
+        <p class="mt-1 text-sm" style="color: var(--text-muted);">{site.title} · {site.location}</p>
+      </div>
+      <div class="flex flex-col gap-1 text-sm mono" style="color: var(--text-muted);">
+        <a href={`tel:${site.phone.replace(/[^0-9]/g, "")}`}>{site.phone}</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <div class="flex gap-4 pt-1">
+          <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+          <a href={site.github} target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <p class="mt-8 text-xs" style="color: var(--text-muted);">© {year} {site.name}. All rights reserved.</p>
+  </div>
+</footer>
