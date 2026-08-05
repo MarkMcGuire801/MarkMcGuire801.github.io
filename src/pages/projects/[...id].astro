@@ -1,0 +1,31 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects")).filter((p) => p.data.hasWriteup);
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Base title={project.data.title} description={project.data.summary}>
+  <article class="mx-auto max-w-2xl px-5 pt-16 sm:px-8 sm:pt-20">
+    <a href="/projects" class="mono text-xs" style="color: var(--text-muted);">← Back to projects</a>
+    <header class="mt-4 mb-8">
+      <div class="mb-3 flex flex-wrap items-center gap-2">
+        <span class="pill" style="color: var(--slate); border-color: var(--slate);">{project.data.status}</span>
+        {project.data.tags.map((t) => (
+          <span class="text-xs mono" style="color: var(--slate);">#{t.replace(/\s+/g, "")}</span>
+        ))}
+      </div>
+      <h1 class="text-3xl leading-tight sm:text-4xl">{project.data.title}</h1>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>
