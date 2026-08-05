@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+/* ------------------------------------------------------------------
+   Ink Wash — design tokens
+   Light is the default; [data-theme="dark"] inverts the relationship.
+------------------------------------------------------------------ */
+@theme {
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body: "Inter Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+}
+
+:root {
+  --cream: #ede4cc;
+  --ink: #262626;
+  --graphite: #4a4a4a;
+  --mist: #bdb8ac;
+  --slate: #5e7288;
+  --slate-deep: #46586b;
+
+  /* semantic roles — light mode */
+  --bg: #ede4cc;
+  --bg-raised: #f4eedb;
+  --text: #262626;
+  --text-muted: #59554b;
+  --border: #d3cbb4;
+  --border-strong: #bdb8ac;
+  --accent: #506278;
+  --accent-hover: #46586b;
+  --code-bg: #e4dabf;
+}
+
+:root[data-theme="dark"] {
+  --bg: #232323;
+  --bg-raised: #2e2e2e;
+  --text: #ede4cc;
+  --text-muted: #a8a29a;
+  --border: #3a3a3a;
+  --border-strong: #4a4a4a;
+  --accent: #8194a8;
+  --accent-hover: #a0b1c3;
+  --code-bg: #2a2a2a;
+}
+
+@layer base {
+  * { border-color: var(--border); }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--bg);
+    color-scheme: light dark;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; }
+
+  a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
+  a:hover { color: var(--accent-hover); }
+
+  ::selection { background: var(--slate); color: var(--cream); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  code, kbd, .mono { font-family: var(--font-mono); }
+}
+
+/* ------------------------------------------------------------------
+   Signature: the ink-line — a hairline that draws itself in on reveal
+------------------------------------------------------------------ */
+.ink-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+.ink-eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-strong);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible .ink-eyebrow::after { transform: scaleX(1); }
+
+/* scroll reveal */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* utility surfaces */
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.card-link:hover { border-color: var(--slate); transform: translateY(-3px); }
+
+.pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+}
+
+/* ------------------------------------------------------------------
+   Prose — long-form markdown (blog posts, project writeups)
+------------------------------------------------------------------ */
+.prose { max-width: 42rem; }
+.prose > * + * { margin-top: 1.15rem; }
+.prose h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 0.5rem; }
+.prose h3 { font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.4rem; }
+.prose p { color: var(--text); }
+.prose a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--border-strong); }
+.prose ul, .prose ol { padding-left: 1.3rem; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li { margin-top: 0.4rem; }
+.prose li::marker { color: var(--text-muted); }
+.prose strong { font-weight: 600; }
+.prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+.prose blockquote {
+  border-left: 2px solid var(--slate);
+  padding: 0.25rem 0 0.25rem 1.1rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.prose code {
+  font-size: 0.875em;
+  background: var(--code-bg);
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+}
+.prose pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose img { border-radius: 12px; border: 1px solid var(--border); }
+.blog-callout {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--slate);
+  border-radius: 0 10px 10px 0;
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
