@@ -1,7 +1,6 @@
 export const site = {
   name: "Mark McGuire",
   title: "Jr. IT Systems Administrator",
-  subtitle: "Aspiring Cybersecurity Professional",
   location: "Tucson, AZ",
   phone: "(520) 808-1479",
   email: "MarkMcGuire8101@gmail.com",
